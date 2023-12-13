@@ -1,0 +1,23 @@
+/* .this-navbar li a{
+    color:white;
+}
+
+.navbar-brand{
+    color:white;
+} */
+
+.this-navbar{
+    height: 95px;
+}
+
+.btn{
+    margin-left:10px;
+    background-color: rgba(52, 184, 188, 1);
+}
+
+
+.access{
+    margin-top: 40px;
+    margin-left: 12px;
+    vertical-align: bottom;
+}
