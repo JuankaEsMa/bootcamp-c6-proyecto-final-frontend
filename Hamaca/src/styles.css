@@ -2,3 +2,9 @@
 * {
   font-family: 'Inter', sans-serif;
 }
+:root{
+  --azul-fuerte: #202140;
+  --azul-medio: #34B6BB; 
+  --azul-flojo: #ADD7D3;
+  --naranja: #F29545;
+}
