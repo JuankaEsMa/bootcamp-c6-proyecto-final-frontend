@@ -1,0 +1,48 @@
+.information{
+    background-color: rgba(228, 244, 241, 1);
+}
+
+.description, .location{
+    position:relative;
+    background-color: white;
+    margin: 15px;
+    width: 105vh;
+    border-radius: 15px;
+}
+
+img{
+    margin: 15px;
+}
+
+.card{
+    margin: 15px;
+    width: 105vh;
+}
+
+.tag {
+    position:absolute;
+	top: 0;
+	right: 0;
+    background-color: rgba(255, 199, 0, 1);
+	height: 43px;
+	width: 130px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 20px;
+    font-size: larger;
+}
+
+.date-tag{
+    position: absolute;
+	bottom: 0;
+	right: 0;
+    background-color: rgb(255, 156, 156);
+    height: 28px;
+	width: 166px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 15px;
+    font-size: small;
+}
+
+.tag-text{
+    rotate: -10deg;
+}
