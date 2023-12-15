@@ -18,10 +18,6 @@ export const routes: Routes = [
             {
                 path:'chollo/:id',
                 component:CholloDetailComponent
-            },
-            {
-                path:'chollo/:id',
-                component:CholloDetailComponent
             }
         ]
     },

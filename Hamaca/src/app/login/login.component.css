@@ -1,0 +1,20 @@
+.custom-container {
+  padding-bottom: 50px;
+}
+
+.custom-card {
+  border-radius: 15px;
+}
+
+.custom-input {
+  border-radius: 15px;
+  font-size: 1.2rem;
+  padding: 15px;
+}
+
+.btn-primary {
+  border-color: transparent;
+}
+.custom-btn {
+  background-color: #36b7bd;
+}
