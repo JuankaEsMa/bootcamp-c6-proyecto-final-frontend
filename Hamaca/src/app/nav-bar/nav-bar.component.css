@@ -6,6 +6,10 @@
     color:white;
 } */
 
+.login_buttons{
+    color:white !important;
+}
+
 .this-navbar{
     height: 95px;
 }
