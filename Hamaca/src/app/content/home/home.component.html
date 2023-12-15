@@ -1,1 +1,124 @@
-<p>home works!</p>
+<div class="backgroundImgHome m-5 p-5">
+    <div class="container w-50 border rounded p-4 containerHeaderHome">
+        <div class="row text-center mb-4">
+            <h2 class="col-12">¿A donde te gustaría viajar?</h2>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="btnFiltro p-1 text-center rounded">
+                    Destinos disponibles
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="btnFiltro p-1 text-center rounded">
+                    Entrada y salida
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="btnFiltro p-1 text-center rounded">
+                    Entrada y salida
+                </div>
+            </div>
+            <div class="col-3 ">
+                <div class="btn btn-danger">
+                    Buscar
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="filtroContainer rounded">
+                <h3 class="text-center">Filtrar</h3>
+                <div class="containerPrecios">
+                    <p class="minWidthLabelPrecio">Precio Mínimo</p>
+                    <input type="text" class="w-75">
+                </div>
+                <div class="containerPrecios">
+                    <p class="minWidthLabelPrecio">Precio Máximo</p>
+                    <input type="text" class="w-75">
+                </div>
+                <div>
+                    <div class="mt-4">Temáticas</div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Playa
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Montaña
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Ciudad
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Senderismo
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div class="mt-4">Destinos</div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Barcelona
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Madrid
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Bilbao
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Lugo
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-9 rounded cholloContainer">
+            <div class="imgCholloContainer">
+                <div class="cholloFav">
+                    <fa-icon id="star5" [icon]="fav" (click)="favClick()"></fa-icon>
+
+                </div>
+                <div class="cholloTimeExpiration">
+                    <div class="cholloPrecio">
+                        <div class="text-center precioText">
+                            <span class="precioFont">45€</span>
+                            /Pers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3">
+                <h2>Escapada a Madrid</h2>
+                <p>Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
