@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; 
+import { faCalendar, faUser, faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import { faEarthEurope, faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; 
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -11,6 +11,9 @@ import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 })
 export class HomeComponent {
   fav = regularHeart;
+  calendar = faCalendar;
+  earth = faEarthEurope;
+  persona = faUser;
 
   favClick(){
     if(this.fav == solidHeart){

@@ -1,37 +1,45 @@
-<div class="backgroundImgHome m-5 p-5">
-    <div class="container w-50 border rounded p-4 containerHeaderHome">
+<div class="backgroundImgHome mt-5 p-5">
+    <div class="container border rounded p-4 containerHeaderHome">
         <div class="row text-center mb-4">
             <h2 class="col-12">¿A donde te gustaría viajar?</h2>
         </div>
         <div class="row">
-            <div class="col-3">
-                <div class="btnFiltro p-1 text-center rounded">
-                    Destinos disponibles 
+            <div class="col-md-12 col-lg-6 col-xl-4">
+                <div class="btnFiltro">
+                    <div class="containerHeaderIconSearch gap-2">
+                        <fa-icon class="homeCalendarIcon" [icon]="earth"></fa-icon>
+                        <span class="centerItem">Destinos disponibles</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-3"> 
-                <div class="btnFiltro p-1 text-center rounded">
-                    Entrada y salida 
+            <div class="col-md-12 col-lg-6 col-xl-4"> 
+                <div class="btnFiltro">
+                    <div class="containerHeaderIconSearch gap-2">
+                        <fa-icon class="homeCalendarIcon" [icon]="calendar"></fa-icon>
+                        <span class="centerItem">Entrada -> salida</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="btnFiltro p-1 text-center rounded">
-                    Entrada y salida 
+            <div class="col-md-12 col-lg-12 col-xl-4">
+                <div class="btnFiltro">
+                    <div class="containerHeaderIconSearch gap-2">
+                        <fa-icon class="homeCalendarIcon" [icon]="persona"></fa-icon>
+                        <span class="centerItem">2 Adultos 0 Niños 1 Habitación</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-3 "> 
-                <div class="btn btn-danger">
+            <div class="col-12"> 
+                <div class="btnFiltro btnSearch">
                     Buscar                
                 </div>
-                 
             </div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-3">
+    <div class="row centerItem">
+        <div class="col-9 col-lg-3 mt-4">
             <div class="filtroContainer rounded">
                 <h3 class="text-center">Filtrar</h3>
                 <div class="containerPrecios">
@@ -99,26 +107,27 @@
                 
             </div>
         </div>
-        <div class="col-9 rounded cholloContainer">
-            <div class="imgCholloContainer">
-                <div class="cholloFav">
-                    <fa-icon id="star5" [icon]="fav" (click)="favClick()"></fa-icon>
-
-                </div>
-                <div class="cholloTimeExpiration">
-                    <div class="cholloPrecio">
-                        <div class="text-center precioText">
-                            <span class="precioFont">45€</span>
-                            /Pers.
+        <div class="col-12 col-lg-9 mt-4">
+            <div class="m-2 cholloContainer rounded">
+                <div class="imgCholloContainer">
+                    <div class="cholloFav">
+                        <fa-icon [icon]="fav" (click)="favClick()"></fa-icon>
+    
+                    </div>
+                    <div class="cholloTimeExpiration">
+                        <div class="cholloPrecio">
+                            <div class="text-center precioText">
+                                <span class="precioFont">45€</span>
+                                /Pers.
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="m-3">
+                    <h2>Escapada a Madrid</h2>
+                    <p>Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime.</p>
+                </div>
             </div>
-            <div class="m-3">
-                <h2>Escapada a Madrid</h2>
-                <p>Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime Lorem ipsum dorime.</p>
-            </div>
-            
         </div>
     </div>
 </div>
