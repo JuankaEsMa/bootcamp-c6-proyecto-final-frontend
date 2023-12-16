@@ -1,20 +1,120 @@
-.custom-container {
-  padding-bottom: 50px;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #34b6bb;
+}
+
+.full-container {
+  background-color: white;
+  width: 90%;
+  height: 80vh !important;
+  max-width: 800px;
+  border-radius: 2.5rem;
+  display: flex;
+  position: relative;
+}
+
+
+.bar-side {
+  background-color: #e4f4f1;
+  border-radius: 0 2.5rem 2.5rem 0;
+  position: relative;
+}
+
+.bar-side p {
+  position: absolute;
+  margin: 35px;
+  color: #1F2243;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.logo-img {
+  position: absolute;
+  bottom: 40px;
+  right: 130px;
+  width: 270px;
+}
+
+
+.inner-container {
+  margin: auto;
+  width: 73%;
+}
+
+.h3 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #000;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .custom-card {
+  border: none;
   border-radius: 15px;
 }
 
+.custom-card-header {
+  border-bottom: none;
+}
+
+.custom-card-body {
+  border-top: none;
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+}
+
 .custom-input {
-  border-radius: 15px;
-  font-size: 1.2rem;
-  padding: 15px;
+  border-radius: 10px;
+  font-size: .8rem;
+  padding: 8px;
+}
+
+.custom-input:focus {
+  box-shadow: 0 0 0 0.25rem #e4f4f1;
+  border: #34b6bb;
 }
 
 .btn-primary {
   border-color: transparent;
 }
+
 .custom-btn {
   background-color: #36b7bd;
+  font-size: .8rem;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.custom-btn:active {
+  background-color: #36b7bd;
+  border: #34b6bb;
+  opacity: 50%;
+}
+
+.txt-password-recover {
+  margin-top: 8px;
+  font-size: .8em;
+}
+
+.txt-password-recover a {
+  color: orange;
 }
