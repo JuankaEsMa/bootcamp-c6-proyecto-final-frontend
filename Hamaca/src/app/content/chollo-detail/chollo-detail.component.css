@@ -1,3 +1,7 @@
+.reservar{
+    margin: 15px;
+}
+
 .information{
     background-color: rgba(228, 244, 241, 1);
 }
@@ -6,12 +10,14 @@
     position:relative;
     background-color: white;
     margin: 15px;
-    width: 105vh;
+    padding: 3px;
+    width: 65%;
     border-radius: 15px;
 }
 
 img{
     margin: 15px;
+    border-radius: 10px;
 }
 
 .card{
@@ -24,11 +30,11 @@ img{
 	top: 0;
 	right: 0;
     background-color: rgba(255, 199, 0, 1);
-	height: 43px;
+	height: 35px;
 	width: 130px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 20px;
-    font-size: larger;
+    font-size: large;
 }
 
 .date-tag{
@@ -44,5 +50,5 @@ img{
 }
 
 .tag-text{
-    rotate: -10deg;
+    rotate: -7deg;
 }

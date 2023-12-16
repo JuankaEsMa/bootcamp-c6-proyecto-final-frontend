@@ -1,17 +1,9 @@
-/* .this-navbar li a{
-    color:white;
+.navigation{
+    background-color: rgba(228, 244, 241, 1);
 }
-
-.navbar-brand{
-    color:white;
-} */
 
 .login_buttons{
     color:white !important;
-}
-
-.this-navbar{
-    height: 80px;
 }
 
 .btn{
@@ -21,7 +13,7 @@
 
 
 .access{
-    margin-top: 30px;
+    margin-top: 50px;
     margin-left: 12px;
     vertical-align: bottom;
 }
