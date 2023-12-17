@@ -22,13 +22,17 @@ export class CholloService {
     +filters.dataFinal+"&precioMin="+filters.precioMin+"&precioMax="+filters.precioMax+"&page="+filters.page+"&size="+filters.size;
     return this.httpClient.get(url);
   }
-  deleteCholloById(id:string){
-    return this.httpClient.delete("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/"+id)
-  }
   addChollo(chollo:Chollo){
     return this.httpClient.post("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/", chollo);
   }
   addTematicaInChollo(id:string, idTematica:string){
     return this.httpClient.post("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/"+id, {id:idTematica});
   }
+  updateChollo(id:string, chollo:Chollo):Observable<Chollo>{
+    return this.httpClient.post("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/"+id, chollo);
+  }
+  deleteCholloById(id:string){
+    return this.httpClient.delete("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/"+id)
+  }
+
 }
