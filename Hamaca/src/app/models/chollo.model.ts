@@ -2,9 +2,9 @@ export class Chollo {
     id?:number;
     titulo?:string;
     imagen?:string;
-    precio?:number;
-    cantPersonas?:number;
+    precioPersona?:number;
+    cantidadPersonas?:number;
     descripcion?:string;
-    fecha_caducidad?:Date;
-    isDeleted?:boolean;
+    fechaCaducidad?:Date;
+    deleted?:boolean;
 }
