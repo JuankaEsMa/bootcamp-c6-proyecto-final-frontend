@@ -7,5 +7,5 @@ export class Chollo {
     descripcion?:string;
     fechaCaducidad?:Date;
     deleted?:boolean;
-    localidad?:string;
+    localidad?:any;
 }
