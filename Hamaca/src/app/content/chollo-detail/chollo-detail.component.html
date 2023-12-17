@@ -9,35 +9,40 @@
         <div class="col-12-md description">
                 <div class="tag d-flex justify-content-center align-items-center">
                     <div class="tag-text">
-                        <b>9999<!-- {{chollo.precio}} -->€/pers.</b>
+                        <b>{{chollo.precioPersona}}€/pers.</b>
                     </div>
                 </div>
                 <br>
-                <h5><!-- {{chollo.titulo}} --></h5>
-                <h5>Escapada para el dia de los enamorados en la ciudad de la luz</h5>
+                <h5>{{chollo.titulo}}</h5>
                 <hr>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus nisi veritatis illo explicabo. Nulla fuga harum adipisci 
-                accusantium, iusto quia non doloremque, voluptas quas fugiat culpa nisi! Officiis, ipsa! Ducimus.</p>
-                <p><!-- {{chollo.descripcion}} --></p>
-                <p class='text-right'>Oferta hasta para <!-- {{chollo.cantidad_personas}} --> personas</p>
+                <p>{{chollo.descripcion}}</p>
+                <p class='text-right'>Oferta hasta para {{chollo.cantidadPersonas}} personas.</p>
                 <div class="d-flex justify-content-center reservar">
                     <button class="btn btn-primary login_buttons" type="button">Reservar ahora</button>
                 </div>                 
                 <br>
                 <div class="date-tag d-flex justify-content-center">
                     <div>
-                        <p>Valida hasta el <!-- {{chollo.fecha_caducidad}} -->31/12/2023</p>                                            
+                        <p>Valida hasta el {{chollo.fechaCaducidad}}</p>                                            
                     </div>
                 </div>
             </div>
 
             <div class="location">
-                <h6>Aqui va el alojamiento, (borrar luego)</h6>
+                <h6>Alojamiento:</h6>
                 <hr>
-                <h6><!-- {{chollo.localidad.nombre}} --></h6>             
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus nisi veritatis illo explicabo. Nulla fuga harum adipisci 
-                accusantium, iusto quia non doloremque, voluptas quas fugiat culpa nisi! Officiis, ipsa! Ducimus.</p>
-                <p><!-- {{chollo.localidad.descripcion}} --></p>             
+                <h6>{{localidad.nombre}}</h6>             
+                <!-- <p>{{chollo.localidad.descripcion}}</p> -->
+            </div>
+
+            <div class="location">
+                <h6>Tematicas:</h6>
+                <hr>
+                <p>Tematica 1</p>
+                <!-- @for (tematica of tematicas; track $index) {
+                    <h6>{{tematica.nombre}}</h6>
+                }             -->
+                <!-- <p>{{chollo.localidad.descripcion}}</p> -->
             </div>
     </div>
 </div>
