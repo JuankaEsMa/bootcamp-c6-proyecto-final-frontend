@@ -4,11 +4,13 @@
 }
 
 .outer-container {
+  font-family: "Inter-Medium", Helvetica;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #34b6bb;
+  min-width: 294px;
 }
 
 .full-container {
@@ -21,7 +23,6 @@
   position: relative;
 }
 
-
 .bar-side {
   background-color: #e4f4f1;
   border-radius: 0 2.5rem 2.5rem 0;
@@ -33,7 +34,7 @@
   margin: 35px;
   color: #1F2243;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -41,11 +42,10 @@
 
 .logo-img {
   position: absolute;
-  bottom: 40px;
-  right: 130px;
-  width: 270px;
+  bottom: 60px;
+  left: -100px;
+  width: 300px;
 }
-
 
 .inner-container {
   margin: auto;
@@ -100,7 +100,7 @@
   background-color: #36b7bd;
   font-size: .8rem;
   border-radius: 10px;
-  padding: 10px;
+  padding: 8px;
   width: 100%;
 }
 
@@ -110,11 +110,100 @@
   opacity: 50%;
 }
 
-.txt-password-recover {
+.btn-gmail {
+  text-align: left;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #888787;
+  font-size: .7rem;
+  border-radius: 10px;
+  padding: 8px 30px 8px 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-gmail:active {
+  opacity: 50%;
+}
+
+.btn-gmail img {
+  width: 20px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.custom-text {
   margin-top: 8px;
   font-size: .8em;
 }
 
-.txt-password-recover a {
+.custom-text a {
   color: orange;
 }
+
+.bottom-text {
+  color: #000;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 760px) {
+  .full-container {
+    height: 90vh !important;
+  }
+
+  .bar-side {
+    visibility: hidden;
+  }
+
+  .bar-side p {
+    font-size: 1rem;
+  }
+
+  .logo-img {
+    visibility: hidden;
+  }
+
+  .col-12, .col-sm-8, .col-sm-4, .col-md-3, .col-10, .col-9, .col-11 {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 760px) and (min-height: 740px) {
+  .full-container {
+    height: 90vh !important;
+  }
+
+  .logo-img {
+    visibility: visible;
+    width: 60%;
+    left: 20%;
+  }
+}
+
+@media only screen and (min-height: 740px) and (max-width: 844px) {
+  .full-container {
+    height: 90vh !important;
+  }
+
+  .logo-img {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-height: 740px) {
+  .full-container {
+    height: 80vh !important;
+  }
+}
+
+@media only screen and (min-height: 890px) {
+  .logo-img {
+    visibility: visible;
+    width: 35%;
+    left: 32%;
+    top: -60px;
+  }
+}
+
