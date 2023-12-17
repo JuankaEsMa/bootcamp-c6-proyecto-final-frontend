@@ -8,5 +8,4 @@ export class Chollo {
     fechaCaducidad?:Date;
     deleted?:boolean;
     localidad?:string;
-    tematicas?:string;
 }
