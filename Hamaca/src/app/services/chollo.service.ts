@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chollo } from '../models/chollo.model';
@@ -17,7 +17,7 @@ export class CholloService {
     return this.httpClient.get("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/"+id)
   }
   getAllChollosFiltered(filters:Filters):Observable<any>{
-    let url:string =  "https://proyecto-final-backend-production-c6e8.up.railway.app/chollo?localidad="
+    let url:string = "https://proyecto-final-backend-production-c6e8.up.railway.app/chollo?localidad="
     +filters.localidad+"&tematica="+filters.tematica+"&pais="+filters.pais+"&dataInicio="+filters.dataInicio+"&dataFinal="
     +filters.dataFinal+"&precioMin="+filters.precioMin+"&precioMax="+filters.precioMax+"&page="+filters.page+"&size="+filters.size;
     return this.httpClient.get(url);
