@@ -29,7 +29,7 @@
                         required
                       />
                     </div>
-                    <button type="submit" class="btn btn-primary custom-btn">
+                    <button type="submit" class="btn btn-primary custom-btn" [disabled]="!userForm.valid" (click)="login()">
                       Iniciar sesión
                     </button>
                     <p class="custom-text">
@@ -55,7 +55,7 @@
                   <div class="row d-flex align-items-center mt-4">
                     <div class="col-10"><hr /></div>
                     <p class="custom-text">
-                      ¿Aún no tienes cuenta? <a href="#">Regístrate aquí</a>
+                      ¿Aún no tienes cuenta? <a routerLink="/sign-up">Regístrate aquí</a>
                     </p>
                   </div>
                   <div class="bottom-text-div col-11 mt-3">

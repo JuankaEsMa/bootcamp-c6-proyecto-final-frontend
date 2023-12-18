@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12-md">
             <div class="d-flex justify-content-center">
-                <img src= "https://viajes4k.com/wp-content/uploads/2020/11/gettyimages-638351438.jpg.webp" class="img-fluid" alt="Responsive image" width="650" height="370">    
+                <img src= {{chollo.imagen}} class="img-fluid" alt="Responsive image" width="650" height="370">    
             </div>
     </div>
     <div class="row d-flex justify-content-center information">
@@ -38,11 +38,11 @@
             <div class="location">
                 <h6>Tematicas:</h6>
                 <hr>
-                <p>Tematica 1</p>
-                <!-- @for (tematica of tematicas; track $index) {
-                    <h6>{{tematica.nombre}}</h6>
-                }             -->
+                @for (tematica of tematicas; track $index) {
+                    <h6>- {{tematica.nombre}}</h6>
+                }
                 <!-- <p>{{chollo.localidad.descripcion}}</p> -->
             </div>
+        </div>
     </div>
 </div>

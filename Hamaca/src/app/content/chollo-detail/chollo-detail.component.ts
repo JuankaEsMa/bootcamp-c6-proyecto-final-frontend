@@ -20,7 +20,7 @@ export class CholloDetailComponent implements OnInit{
   id:string='';
   chollo:Chollo = new Chollo();
   localidad:any = null;
-  // tematicas:string = '';
+  tematicas:Array<any> = [];
 
   constructor(private route:ActivatedRoute, private service:CholloService){}
 
@@ -28,17 +28,17 @@ export class CholloDetailComponent implements OnInit{
     this.route.params.subscribe(param => 
       this.id = param['id']);
       console.log('Engaged');
-      this.getCharacter();
+      this.getChollo();
   }
 
-  getCharacter(){
+  getChollo(){
     console.log("Calling..."+this.id);
     this.service.getCholloById(this.id)
     .subscribe(result => {
       this.chollo = result;
       console.log(this.chollo);
       this.localidad = this.chollo.localidad;
-      // this.tematicas = this.chollo.tematicas;
+      this.tematicas = this.chollo.tematicas;
     })
   }
 }
