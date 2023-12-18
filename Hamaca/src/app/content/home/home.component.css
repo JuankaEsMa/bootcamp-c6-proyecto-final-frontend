@@ -33,22 +33,28 @@
     padding: 0;
 }
 .imgCholloContainer{
-    display: flex;
+    display: block;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-image: url("https://content.buscounchollo.com/img/groups/26076/panoramica4.jpg?v=1702367870");
     min-height: 350px;
     background-position: center;
     background-size: cover;
     border-radius: 10px 10px 0px 0px;
+    overflow: hidden;
+}
+.imgChollo{
+    height: 100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .cholloPrecio{
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     background-color: var(--naranja);
-    top: -150%;
+    top: -200%;
     right: 25px;
     border-radius: 50%;
     display: flex;
@@ -83,12 +89,13 @@
 .minWidthLabelPrecio{
     min-width: 40%;
 }
-.imgChollo{
-    width: 100%;
-}
 .backgroundImgHome{
-    background-image: url("../../../assets/fotomural_hamaca.png");
+    background-image: url("../../../assets/fotomuralHamaca.png");
     background-size: cover;
+}
+
+.imgChollo{
+    height: 100%;
 }
 
 .containerHeaderHome{

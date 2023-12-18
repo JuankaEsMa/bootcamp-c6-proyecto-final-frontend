@@ -44,86 +44,69 @@
                 <h3 class="text-center">Filtrar</h3>
                 <div class="containerPrecios">
                     <p class="minWidthLabelPrecio">Precio Mínimo</p>
-                    <input type="text" class="w-75">
+                    <input id=precioMin type="text" class="w-75">
                 </div>
                 <div class="containerPrecios">
                     <p class="minWidthLabelPrecio">Precio Máximo</p>
-                    <input type="text" class="w-75">
+                    <input id=precioMax type="text" class="w-75">
                 </div>                
-                <div>
+                <div id="tematicasContainer">
                     <div class="mt-4">Temáticas</div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Playa
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Montaña
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Ciudad
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Senderismo
-                        </label>
-                    </div>
+                    @for (tematica of tematicas; track tematica.id) {
+                        <div class="form-check">
+                            <input class="form-check-input tematicaInput" type="checkbox" value="{{tematica.nombre}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{tematica.nombre}}
+                            </label>
+                        </div>
+                    }
                 </div>
-                <div>
-                    <div class="mt-4">Destinos</div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Barcelona
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Madrid
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Bilbao
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Lugo
-                        </label>
-                    </div>
+                <div id="localidadesContainer">
+                    <div class="mt-4">Localidades</div>
+                    @for (localidad of localidades; track localidad.id) {
+                        <div class="form-check">
+                            <input class="form-check-input localidadInput" type="checkbox" value="{{localidad.nombre}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{localidad.nombre}}
+                            </label>
+                        </div>
+                    }
                 </div>
-                
+                <div id="paisesContainer">
+                    <div class="mt-4">Paises</div>
+                    @for (pais of paises; track pais.id) {
+                        <div class="form-check">
+                            <input class="form-check-input paisInput" type="checkbox" value="{{pais.nombre}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{pais.nombre}}
+                            </label>
+                        </div>
+                    }
+                </div>
+                <div class="btn btn-sm btn-success mt-4" (click)="filterClick()" >
+                    Buscar                
+                </div>
             </div>
         </div>
         <div class="col-12 col-lg-9 mt-4">
             @for (chollo of chollos; track chollo.id) {
                 <div class="m-2 cholloContainer rounded">
                     <div class="imgCholloContainer">
-                        <div class="cholloFav">
-                            <fa-icon [icon]="fav" (click)="favClick(chollo.id)"></fa-icon>
-                        </div>
+                        @if (chollo.imagen != null) {
+                            <img class="imgChollo"src="https://content.buscounchollo.com/img/groups/26098/panoramica4.jpg?v=1702473143" alt="">
+                        }@else {
+                            <img class="imgChollo"src="" alt="">
+                        }
                         <div class="cholloTimeExpiration">
                             <div class="cholloPrecio">
                                 <div class="text-center precioText">
-                                    <span class="precioFont">{{chollo.precioPersona}}€</span>
+                                    <span class="precioFont">{{chollo.precioPersona}}€</span><br>
                                     /Pers.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="m-3">
+                    <div class="p-2">
                         <h2>{{chollo.titulo}}</h2>
                         <p>{{chollo.descripcion}}</p>
                     </div>
