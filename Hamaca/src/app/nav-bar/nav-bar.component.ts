@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
+import { TokenStorageService } from '../services/token-storage.service';
 
 
 @Component({
@@ -11,11 +12,16 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 })
 export class NavBarComponent {
 
-  ngOnInit(){
+  token:string|null;
 
+  constructor(public tokenService: TokenStorageService){
+    console.log(tokenService.getUser());
+    this.token = this.tokenService.getToken();
   }
 
-  onHomeClick(){
-    
+  logout(){
+    console.log("entro")
+    this.tokenService.signOut();
+    this.token = null;
   }
 }

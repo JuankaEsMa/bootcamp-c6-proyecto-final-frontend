@@ -4,29 +4,33 @@
             <h2 class="col-12">¿A donde te gustaría viajar?</h2>
         </div>
         <div class="row">
-            <div class="col-md-12 col-lg-6 col-xl-4">
-                <div class="btnFiltro">
-                    <div class="containerHeaderIconSearch gap-2">
-                        <fa-icon class="homeCalendarIcon" [icon]="earth"></fa-icon>
-                        <span class="centerItem">Destinos disponibles</span>
-                    </div>
-                </div>
+            <div class="col-4 col-xl-4 centerItem">
+                <mat-form-field>
+                    <mat-label>Destino</mat-label>
+                    <mat-select>
+                      @for (pais of paises; track pais.id) {
+                        <mat-option [value]="pais.nombre">{{pais.nombre}}</mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
             </div>
-            <div class="col-md-12 col-lg-6 col-xl-4"> 
-                <div class="btnFiltro">
-                    <div class="containerHeaderIconSearch gap-2">
-                        <fa-icon class="homeCalendarIcon" [icon]="calendar"></fa-icon>
-                        <span class="centerItem">Entrada -> salida</span>
-                    </div>
-                </div>
+            <div class="col-4 col-xl-4 centerItem"> 
+                <mat-form-field class="m-auto">
+                    <mat-label>Enter a date range</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date">
+                        <input matEndDate placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
             </div>
-            <div class="col-md-12 col-lg-12 col-xl-4">
-                <div class="btnFiltro">
-                    <div class="containerHeaderIconSearch gap-2">
-                        <fa-icon class="homeCalendarIcon" [icon]="persona"></fa-icon>
-                        <span class="centerItem">2 Adultos 0 Niños 1 Habitación</span>
-                    </div>
-                </div>
+            <div class="col-md-4 col-lg-4 col-xl-4 centerItem">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Numero de personas</mat-label>
+                    <input type="number" matInput value="">
+                  </mat-form-field>
             </div>
             <div class="col-12"> 
                 <div class="btnFiltro btnSearch">

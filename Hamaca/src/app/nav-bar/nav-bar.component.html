@@ -21,9 +21,15 @@
           <a class="nav-link active" href="#">País</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <button class="btn btn-sm login_buttons" type="button">Crear cuenta</button>
-        <button class="btn btn-sm login_buttons" type="button">Iniciar sesión</button>
+
+      <form class="d-flex">
+        @if (token == null) {
+          <button class="btn btn-sm login_buttons" type="button"routerLink="sign-up">Crear cuenta</button>
+          <button class="btn btn-sm login_buttons" type="button" routerLink="login">Iniciar sesión</button>
+        }@else {
+          <button class="btn btn-sm login_buttons" type="button" (click)="logout()">Log Out</button>
+          <div>{{tokenService.getUser()}}</div>
+        }
       </form>
     </div>
   </div>

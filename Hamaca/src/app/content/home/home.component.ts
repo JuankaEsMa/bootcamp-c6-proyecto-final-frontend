@@ -12,11 +12,17 @@ import { LocalidadService } from '../../services/localidad.service';
 import { PaisService } from '../../services/pais.service';
 import { Filters } from '../../models/filters.model';
 import { Router } from '@angular/router';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,MatInputModule,MatSelectModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -115,4 +121,3 @@ export class HomeComponent implements OnInit{
     this.router.navigate(["chollo/"+id]);
   }
 }
-

@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { LoginService } from '../services/login.service'
 import { SharedService } from '../services/shared.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../services/token-storage.service';
 
 declare var bootstrap: any;
 
@@ -19,7 +20,7 @@ export class LoginComponent implements AfterViewInit {
   email: any = null;
   password: any = null;
 
-  constructor(private service: LoginService, private sharedService: SharedService, private elementRef: ElementRef, private router: Router) { }
+  constructor(private service: LoginService, private sharedService: SharedService, private elementRef: ElementRef, private router: Router, private tokenService: TokenStorageService) { }
 
   userForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -49,7 +50,8 @@ export class LoginComponent implements AfterViewInit {
     this.service.login(this.userForm.value.email, this.userForm.value.password).subscribe({
       next: (result) => {
           if (result.token) {
-              localStorage.setItem('token', result.token);
+              console.log(result);
+              this.tokenService.saveToken(result.token)
               this.router.navigate(['home'])
           }
       },

@@ -2,12 +2,10 @@ import { HttpInterceptorFn, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent
 import { Observable } from 'rxjs';
 
 export class ApiLoggingInterceptor implements HttpInterceptor {
+  
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('token');
-    const authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + token)});
-    console.log(req);
-    console.log("HOlA");
-
+    const authReq = req.clone({headers: req.headers.set('Authorization', 'my-auth-token')});
+    console.log("ENTRA AL INTERCEPTOR")
     return next.handle(authReq);
   }
 };
