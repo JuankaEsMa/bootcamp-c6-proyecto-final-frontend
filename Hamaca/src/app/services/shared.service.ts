@@ -9,7 +9,7 @@ export class SharedService {
  message$ = this.messageSubject.asObservable();
 
  setMessage(message: string) {
- this.messageSubject.next(message);
+  this.messageSubject.next(message);
  }
 
  getMessage() {
