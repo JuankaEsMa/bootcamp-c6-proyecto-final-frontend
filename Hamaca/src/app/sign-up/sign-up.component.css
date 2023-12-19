@@ -88,8 +88,8 @@
 }
 
 .custom-input:focus {
-  box-shadow: 0 0 0 0.25rem #e4f4f1;
-  border: #34b6bb;
+    box-shadow: 0 0 0 0.25rem #e4f4f1;
+    border-color: #34b6bb;
 }
 
 .btn-primary {

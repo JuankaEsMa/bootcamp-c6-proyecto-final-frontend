@@ -1,39 +1,71 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { LoginService } from '../services/login.service'
+import { SharedService } from '../services/shared.service';
+import { Router } from '@angular/router';
 
-
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
 
-  email:any = null;
-  password:any = null;
+  email: any = null;
+  password: any = null;
 
-  constructor(private service:LoginService){}
+  constructor(private service: LoginService, private sharedService: SharedService, private elementRef: ElementRef, private router: Router) { }
 
   userForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
   })
 
-  login(){
+  ngAfterViewInit() {
+    var forms = this.elementRef.nativeElement.querySelectorAll('.needs-validation');
 
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event: any) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  }
+
+  login() {
     this.email = this.userForm.get('email')?.value;
     this.password = this.userForm.get('password')?.value;
 
-
-    this.service.login(this.userForm.value.email,this.userForm.value.password).subscribe(result => {
-      if(result.result){
-        
+    this.service.login(this.userForm.value.email, this.userForm.value.password).subscribe({
+      next: (result) => {
+          if (result.token) {
+              localStorage.setItem('token', result.token);
+              this.router.navigate(['home'])
+          }
+      },
+      error: (error) => {
+        if (error.status === 403) {
+          this.sharedService.setMessage("Usuario o contraseña incorrectos");
+        } else {
+          this.sharedService.setMessage("Ha ocurrido un error");
+        }
+        this.showToast();
       }
-    })
+    });
+  }
+
+  showToast(delay: number = 5000) {
+    let toast = new bootstrap.Toast(document.querySelector('.toast'), { delay: delay })
+    toast.show();
   }
 }

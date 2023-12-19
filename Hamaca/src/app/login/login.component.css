@@ -89,7 +89,7 @@
 
 .custom-input:focus {
   box-shadow: 0 0 0 0.25rem #e4f4f1;
-  border: #34b6bb;
+  border-color: #34b6bb;
 }
 
 .btn-primary {
@@ -165,7 +165,13 @@
     visibility: hidden;
   }
 
-  .col-12, .col-sm-8, .col-sm-4, .col-md-3, .col-10, .col-9, .col-11 {
+  .col-12,
+  .col-sm-8,
+  .col-sm-4,
+  .col-md-3,
+  .col-10,
+  .col-9,
+  .col-11 {
     width: 100%;
   }
 }
@@ -206,4 +212,3 @@
     top: -60px;
   }
 }
-

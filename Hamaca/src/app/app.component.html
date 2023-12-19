@@ -6,4 +6,10 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<router-outlet></router-outlet>
+<router-outlet>
+  <div class="toast toast-error position-absolute mt-3 mr-3 top-0 end-0 bg-danger text-white">
+    <div class="toast-body">
+        {{ message }}
+    </div>
+  </div>
+</router-outlet>
