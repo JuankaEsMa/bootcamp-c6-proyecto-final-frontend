@@ -11,6 +11,7 @@ import { Pais } from '../../models/pais.model';
 import { LocalidadService } from '../../services/localidad.service';
 import { PaisService } from '../../services/pais.service';
 import { Filters } from '../../models/filters.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ import { Filters } from '../../models/filters.model';
 export class HomeComponent implements OnInit{
 
   constructor(private cholloService: CholloService, private tematicaService: TematicaService, 
-    private localidadService:LocalidadService, private paisService:PaisService){}
+    private localidadService:LocalidadService, private paisService:PaisService, private router: Router){}
 
   fav = regularHeart;
   calendar = faCalendar;
@@ -106,8 +107,12 @@ export class HomeComponent implements OnInit{
     }
 
     this.cholloService.getAllChollosFiltered(filters).subscribe(body => {
+      this.chollos = body.Chollos;
       console.log(body);
     });
+  }
+  clickChollo(id:any){
+    this.router.navigate(["chollo/"+id]);
   }
 }
 

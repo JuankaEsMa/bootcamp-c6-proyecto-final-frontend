@@ -115,3 +115,6 @@
     flex-wrap: wrap;
     place-content: center;
 }
+.link{
+    cursor: pointer
+}
