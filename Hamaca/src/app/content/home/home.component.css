@@ -1,5 +1,4 @@
 .btnFiltro{
-    background-color: rgb(217, 217, 217);
     padding: 1em;
     border-radius: 10px;
     margin: 10px;
@@ -74,7 +73,7 @@
     flex-direction: row-reverse;
 }
 .filtroContainer, .cholloContainer{
-    background-color: rgb(217, 217, 217);
+    background-color: var(--azul-flojo);
 }
 .cholloFav{
     color: white;
@@ -101,6 +100,7 @@
 .containerHeaderHome{
     background-color: white;
     font-size: 12px;
+    width: 100%;
 }
 .homeCalendarIcon{
     font-size: 2em;
@@ -117,4 +117,12 @@
 }
 .link{
     cursor: pointer
+}
+.widthInputsSearch{
+    width: 200px;
+}
+@media (min-width: 768px ) {
+    .containerHeaderHome{
+        width: 60%;
+    }
 }
