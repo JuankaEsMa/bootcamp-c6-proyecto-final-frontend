@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit{
     let pais:string = "";
     for (let i = 0; i < localidades.length; i++) {
       if(localidades[i].checked){
+        console.log('LOOOOL');
         localidad = localidades[i].value;
       }
     }
