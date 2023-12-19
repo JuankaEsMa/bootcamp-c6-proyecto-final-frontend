@@ -17,7 +17,7 @@ export class LoginComponent {
   email:any = null;
   password:any = null;
 
-  constructor(private service:LoginService){}
+  constructor(private readonly service:LoginService){}
 
   userForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -26,14 +26,5 @@ export class LoginComponent {
 
   login(){
 
-    this.email = this.userForm.get('email')?.value;
-    this.password = this.userForm.get('password')?.value;
-
-
-    this.service.login(this.userForm.value.email,this.userForm.value.password).subscribe(result => {
-      if(result.result){
-        
-      }
-    })
   }
 }

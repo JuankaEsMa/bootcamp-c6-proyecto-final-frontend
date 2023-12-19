@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { Router, RouterOutlet, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -11,11 +11,13 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 })
 export class NavBarComponent {
 
-  ngOnInit(){
+  constructor(private router:Router){}
 
+  loginClick(){
+    this.router.navigate(['/login']);
   }
 
-  onHomeClick(){
-    
+  sesionClick(){
+    this.router.navigate(['/sign-up']);
   }
 }
