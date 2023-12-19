@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet, RouterLink } from '@angular/router';
+import { TokenStorageService } from '../services/token-storage.service';
 
 
 @Component({
@@ -11,13 +12,17 @@ import { Router, RouterOutlet, RouterLink } from '@angular/router';
 })
 export class NavBarComponent {
 
-  constructor(private router:Router){}
+  token:string|null;
 
-  loginClick(){
-    this.router.navigate(['/login']);
+  constructor(public tokenService: TokenStorageService){
+    console.log(tokenService.getUser());
+    this.token = this.tokenService.getToken();
   }
 
-  sesionClick(){
-    this.router.navigate(['/sign-up']);
+  logout(){
+    console.log("entro")
+    this.tokenService.signOut();
+    this.token = null;
+
   }
 }
