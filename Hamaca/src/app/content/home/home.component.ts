@@ -121,4 +121,8 @@ export class HomeComponent implements OnInit{
   clickChollo(id:any){
     this.router.navigate(["chollo/"+id]);
   }
+
+  clickSearch(){
+
+  }
 }

@@ -1,39 +1,39 @@
 <div class="backgroundImgHome mt-5 p-5">
-    <div class="container border rounded p-4 containerHeaderHome">
+    <div class="container border rounded p-4 containerHeaderHome w-60 w-md-100">
         <div class="row text-center mb-4">
-            <h2 class="col-12">¿A donde te gustaría viajar?</h2>
+            <h1 class="col-12">¿A donde te gustaría viajar?</h1>
         </div>
         <div class="row">
-            <div class="col-4 col-xl-4 centerItem">
-                <mat-form-field>
+            <div class="col-12 col-lg-6 col-xl-4 centerItem">
+                <mat-form-field class="widthInputsSearch">
                     <mat-label>Destino</mat-label>
-                    <mat-select>
-                      @for (pais of paises; track pais.id) {
+                    <mat-select id="selectPais">
+                        @for (pais of paises; track pais.id) {
                         <mat-option [value]="pais.nombre">{{pais.nombre}}</mat-option>
-                      }
+                        }
                     </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
             </div>
-            <div class="col-4 col-xl-4 centerItem"> 
-                <mat-form-field class="m-auto">
+            <div class="col-12 col-lg-6 col-xl-4 centerItem"> 
+                <mat-form-field class="widthInputsSearch">
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker">
-                        <input matStartDate placeholder="Start date">
-                        <input matEndDate placeholder="End date">
+                        <input matStartDate placeholder="Start date" class="startDateInput">
+                        <input matEndDate placeholder="End date" class="endDateInput">
                     </mat-date-range-input>
-                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-hint class="text-center">MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
                 </mat-form-field>
             </div>
-            <div class="col-md-4 col-lg-4 col-xl-4 centerItem">
-                <mat-form-field class="example-full-width">
+            <div class="col-12 col-xl-4 centerItem">
+                <mat-form-field class="widthInputsSearch">
                     <mat-label>Numero de personas</mat-label>
-                    <input type="number" matInput value="">
+                    <input type="number" matInput value="" id="inputPersonas">
                   </mat-form-field>
             </div>
-            <div class="col-12"> 
-                <div class="btnFiltro btnSearch">
+            <div class="col-12 centerItem"> 
+                <div class="btnFiltro btnSearch" (click)="clickSearch()">
                     Buscar                
                 </div>
             </div>

@@ -1,5 +1,5 @@
 .navigation{
-    background-color: rgba(228, 244, 241, 1);
+    background-color: var(--azul-flojo);
 }
 
 .login_buttons{
@@ -8,9 +8,8 @@
 
 .btn{
     margin-left:10px;
-    background-color: rgba(52, 184, 188, 1);
+    background-color: var(--azul-medio);
 }
-
 
 .access{
     margin-top: 50px;
