@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
 
-const url:string = 'https://proyecto-final-backend-production-c6e8.up.railway.app/';
+const url:string = 'https://proyecto-final-backend-production-c6e8.up.railway.app';
 const jsonOptions = {headers: new HttpHeaders({'Content-Type':'application/json'})}
 
 @Injectable({
