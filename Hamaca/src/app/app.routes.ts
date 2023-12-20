@@ -7,6 +7,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ContentComponent } from './content/content.component';
 import { ClientPageComponent } from './client-page/client-page.component';
 import { clientGuard } from './guards/client.guard';
+import { MyUserComponent } from './content/my-user/my-user.component';
 
 
 export const routes: Routes = [
@@ -21,6 +22,10 @@ export const routes: Routes = [
             {
                 path:'chollo/:id',
                 component:CholloDetailComponent
+            },
+            {
+                path: 'my-user',
+                component: MyUserComponent
             }
         ]
     },

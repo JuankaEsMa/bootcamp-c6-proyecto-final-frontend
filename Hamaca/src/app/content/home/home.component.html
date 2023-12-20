@@ -92,21 +92,29 @@
                         </div>
                     }
                 </div>
-                <div class="btn btn-sm btn-success mt-4" (click)="filterClick()" >
+                <a class="btn btn-sm btn-success mt-4 btnBuscar" (click)="filterClick()" >
                     Buscar                
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-12 col-lg-9 mt-4">
             @for (chollo of chollos; track chollo.id) {
                 <div class="m-2 cholloContainer rounded">
                     <div class="imgCholloContainer">
+                        <div class="containerFavClick">
+                            @if (chollo.id != undefined) {
+                                <fa-icon [icon]="getFavIcon(chollo.id)" (click)="favClick(chollo.id)" class="favButton"></fa-icon>
+                            }
+                        </div>
                         @if (chollo.imagen != null) {
-                            <img class="imgChollo"src="https://content.buscounchollo.com/img/groups/26098/panoramica4.jpg?v=1702473143" alt="">
+                            <img class="imgChollo"src="https://content.buscounchollo.com/img/groups/26098/panoramica4.jpg?v=1702473143" alt=""/>
                         }@else {
                             <img class="imgChollo"src="" alt="">
                         }
                         <div class="cholloTimeExpiration">
+                            <div class="centerItem ms-4">
+                                Valida hasta el {{chollo.fechaCaducidad}}
+                            </div>
                             <div class="cholloPrecio">
                                 <div class="text-center precioText">
                                     <span class="precioFont">{{calculatePrecio(chollo.precioPersona)}}€</span><br>

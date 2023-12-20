@@ -21,6 +21,8 @@ export class CholloDetailComponent implements OnInit{
   chollo:Chollo = new Chollo();
   localidad:any = null;
   tematicas:Array<any> = [];
+  daysBetween: number = 1;
+  personas: number = 1;
 
   constructor(private route:ActivatedRoute, private service:CholloService){}
 
@@ -29,6 +31,11 @@ export class CholloDetailComponent implements OnInit{
       this.id = param['id']);
       console.log('Engaged');
       this.getChollo();
+      this.route.queryParams.subscribe(params=>{
+        console.log(params);
+        this.daysBetween = params['daysBetween'];
+        this.personas = params['personas'];
+      })
   }
 
   getChollo(){
@@ -40,5 +47,16 @@ export class CholloDetailComponent implements OnInit{
       this.localidad = this.chollo.localidad;
       this.tematicas = this.chollo.tematicas;
     })
+  }
+
+  calculatePrecio(precio:number|undefined):number{
+    if(precio != undefined){
+      return this.daysBetween * precio;
+    }
+    return 0;
+  }
+
+  reservar(id:number|undefined){
+    
   }
 }

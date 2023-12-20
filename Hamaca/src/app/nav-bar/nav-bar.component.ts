@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet, RouterLink } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage.service';
+import { UsuarioService } from '../services/user.service';
+import { error } from 'console';
+import { User } from '../models/user.model';
 
 
 @Component({
@@ -12,16 +15,29 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class NavBarComponent {
 
-  token:string|any;
+  user:User|undefined = undefined;
 
-  constructor(public tokenService: TokenStorageService){
-    this.token = this.tokenService.getToken();
+  constructor(private tokenService: TokenStorageService, private userService: UsuarioService, private router:Router){
+    userService.getAllUsers().subscribe({
+      next: (result)=>{
+        this.user = result;
+      },
+      error: (error) =>{
+        this.user = undefined;
+      }
+    })
   }
 
   logout(){
-    console.log("entro")
     this.tokenService.signOut();
-    this.token = null;
-
+    this.router.navigate(['/home'])
+    this.user = undefined;
+  }
+  getUserInitial(){
+    if(this.user != undefined){      
+      return this.user.nombre?.charAt(0);
+    }else{
+      return "H";
+    }
   }
 }
