@@ -19,7 +19,7 @@ export class TokenStorageService {
     sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  public getToken(): string | null{
+  public getToken(): string | any{
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
