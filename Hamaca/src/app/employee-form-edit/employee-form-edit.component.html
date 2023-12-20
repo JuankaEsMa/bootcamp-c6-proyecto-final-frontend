@@ -64,25 +64,17 @@
             <div class="invalid-feedback">Por favor, introduce la localidad del chollo.</div>
         </div>
         <div class="col-3 mt-4 mb-2 px-2">
-            <p class="text-end">Empleado:</p>
-        </div>
-        <div class="col-8 mt-4 mb-2 px-2">
-            <input id="idEmpleado" type="text" formControlName="idEmpleado" class="form-control" placeholder="Empleado" required>
-            <div class="invalid-feedback">Por favor, introduzca su ID de empleado.</div>
-        </div>
-        <div class="col-3 mt-4 mb-2 px-2">
             <p class="text-end">Temáticas:</p>
         </div>
+        <!-- <div class="col-8 mt-4 mb-2 px-2">
+            <input id="tematica" type="text" formControlName="tematica" class="form-control" placeholder="Aventura" required>
+            <div class="invalid-feedback">Por favor, introduce la localidad del chollo.</div>
+        </div> -->
         <div class="col-8 mt-4 mb-2 px-2 tematicas">
-            @for (tematica of tematicas; track tematica.id) {
+            @for (tema of tematicas; track tematica.id) {
                 <div class="form-check">
-                    <input class="form-check-input tematicaInput" type="radio" name="flexRadioDefault" value="{{tematica.nombre}}" required>
-                    <label class="form-check-label" for="flexRadioDefault1">{{tematica.nombre}}</label>
-                    <!-- <div class="invalid-feedback">More example invalid feedback text</div>                  -->
-                    <!-- <input class="form-check-input tematicaInput" type="checkbox" value="{{tematica.nombre}}">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        {{tematica.nombre}}
-                    </label> -->
+                    <input class="form-check-input tematicaInput" type="checkbox" name="tema" value="{{tema.nombre}}" required>
+                    <label class="form-check-label" for="flexRadioDefault1">{{tema.nombre}}</label>
                     <div class="invalid-feedback">Elije alguno de estos campos para continuar</div>                 
                 </div>
             }

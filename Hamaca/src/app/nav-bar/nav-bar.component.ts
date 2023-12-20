@@ -12,7 +12,7 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class NavBarComponent {
 
-  token:string|null;
+  token:string|any;
 
   constructor(public tokenService: TokenStorageService){
     this.token = this.tokenService.getToken();

@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Chollo } from '../models/chollo.model';
 import { Tematica } from '../models/tematica.model';
+import { Localidad } from '../models/localidad.model';
 import { CholloService } from '../services/chollo.service';
 import { TematicaService } from '../services/tematica.service'
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-employee-form-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './employee-form-edit.component.html',
   styleUrl: './employee-form-edit.component.css'
 })
@@ -19,6 +20,9 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
   id:any = '';
   chollo:Chollo = new Chollo();
   tematicas: Array<Tematica> = [];
+  tematicasChollo: Array<Tematica> = [];
+  tematica = new Tematica();
+  localidad: any = null;
 
   cholloForm = new FormGroup({
     id: new FormControl('', Validators.required),
@@ -28,7 +32,8 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
     precioPersona: new FormControl('', Validators.required),
     cantidadPersonas: new FormControl('', Validators.required),
     fechaCaducidad: new FormControl('', Validators.required),
-    localidad: new FormControl('', Validators.required)
+    localidad: new FormControl('', Validators.required),
+    tematica: new FormControl('', Validators.required)
   })
 
   constructor(private tematicaService:TematicaService, private cholloService:CholloService, private route:ActivatedRoute, private elementRef: ElementRef){}
@@ -43,31 +48,15 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
     this.set_inputs();
   }
 
-  ngAfterViewInit() {
-    var forms = this.elementRef.nativeElement.querySelectorAll('.needs-validation');
-    console.log(forms);
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event: any) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-  }
-
   set_inputs(){
-    console.log(this.id);
     this.cholloService.getCholloById(this.id).subscribe((data:any) => {
-  
-      console.log(data);
-
+      
       this.chollo = data;
-
-      // this.cholloForm.setValue(data);
+    })
+      this.id = this.chollo.id;
+      this.localidad = this.chollo.localidad;
+      this.tematicasChollo = this.chollo.tematicas;
+      // console.log(this.chollo.tematicas);
 
         this.cholloForm.setValue({
           id: this.chollo.id?.toString()!,
@@ -77,35 +66,40 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
           precioPersona: this.chollo.precioPersona?.toString() ?? "",
           cantidadPersonas: this.chollo.cantidadPersonas?.toString() ?? "",
           fechaCaducidad: this.chollo.fechaCaducidad?.toString() ?? "",
-          localidad: this.chollo.localidad?.toString() ?? "",
+          localidad: this.localidad.nombre,
+          tematica: this.chollo.tematicas?.toString() ?? ""
         });
-        
-        // this.cholloForm.value.titulo = this.chollo.titulo;
-        // this.cholloForm.value.imagen = this.chollo.imagen;
-        // this.cholloForm.value.descripcion = this.chollo.descripcion;
-        // this.cholloForm.value.precioPersona = this.chollo.precioPersona?.toString();
-        // this.cholloForm.value.cantidadPersonas = this.chollo.cantidadPersonas?.toString();
-        // this.cholloForm.value.fechaCaducidad = this.chollo.fechaCaducidad?.toString();
-        // this.cholloForm.value.localidad = this.chollo.localidad?.toString();
-
-        this.chollo = data;
-        this.id = this.chollo.id;
-        console.log('Voila:'+this.id);
       
-        let tematicas: any= document.getElementsByClassName("tematicaInput");
+        let tematicasForm: any= document.getElementsByClassName("tematicaInput");
 
-        for (let i = 0; i < tematicas.length; i++) {
-          console.log('Voila:'+tematicas[i].value);
-          if(this.chollo.tematicas === tematicas[i].value){
-            tematicas[i].checked = true;
+        for (let i = 0; i < this.tematicas.length; i++) {
+          for(let j = 0; j < this.tematicasChollo.length; j++){
+              if(this.tematicas[i].nombre === this.tematicasChollo[j].nombre){
+                tematicasForm[i].checked = true;
+              }
           }
-        }      
-    })
+        }
+  }
+
+  ngAfterViewInit() {
+    var forms = this.elementRef.nativeElement.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event: any) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
   }
 
   setCholloValues(){
     this.cholloService.getCholloById(this.id.toString()).subscribe((data:any) => {
       this.chollo = data;
+      this.id = this.chollo.id;
+
       if(data != null){
         this.chollo.id = parseInt(this.cholloForm.value.id!);
         this.chollo.titulo = this.cholloForm.value.titulo?.toString();
@@ -114,30 +108,36 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
         this.chollo.precioPersona = parseFloat(this.cholloForm.value.precioPersona!);
         this.chollo.cantidadPersonas = parseInt(this.cholloForm.value.cantidadPersonas!);
         this.chollo.fechaCaducidad = new Date(this.cholloForm.value.fechaCaducidad!);
-        this.chollo.localidad = this.cholloForm.value.localidad?.toString();
-
-        this.id = this.chollo.id;
-
-        let tematicas: any= document.getElementsByClassName("tematicaInput");
-
-        for (let i = 0; i < tematicas.length; i++) {
-          console.log(tematicas[i].value);
-          if(tematicas[i].checked){
-            this.chollo.tematicas = tematicas[i].value;
-          }
-        }      
+        this.chollo.localidad = this.cholloForm.value.localidad?.toString();   
       }
     })
   }
 
   update(){
+    this.setCholloValues();
 
-      this.setCholloValues();
+    console.log( this.tematica.id?.toString() ?? "");
 
-      this.cholloService.updateChollo(this.id, this.chollo).subscribe(
+    this.cholloService.updateChollo(this.id, this.chollo).subscribe(
       response => {
         console.log(response);
       }
     );
+
+    let tematicasAdd: any= document.getElementsByClassName("tematicaInput");
+    let tematica:string = '';
+
+    for (let i = 0; i < tematicasAdd.length; i++) {
+      if(tematicasAdd[i].checked){
+        tematica = tematicasAdd[i].value;
+
+        this.cholloService.addTematicaInChollo(this.cholloForm.value.id!, tematica).subscribe(
+          response => {
+            console.log(response);
+          }
+        );
+      }
+    }
   }
+
 }

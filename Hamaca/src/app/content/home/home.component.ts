@@ -14,31 +14,56 @@ import { Filters } from '../../models/filters.model';
 import { Router } from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {MatNativeDateModule } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { DateAdapter } from '@angular/material/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,MatInputModule,MatSelectModule],
+  imports: [FontAwesomeModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,MatInputModule,MatSelectModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit{
 
   constructor(private cholloService: CholloService, private tematicaService: TematicaService, 
-    private localidadService:LocalidadService, private paisService:PaisService, private router: Router){}
+    private localidadService:LocalidadService, private paisService:PaisService, private router: Router,
+    private dateAdapter: DateAdapter<Date>){
+      this.dateAdapter.setLocale('es-ES')
+    }
 
-  fav = regularHeart;
-  calendar = faCalendar;
-  earth = faEarthEurope;
-  persona = faUser;
-  chollos:Array<Chollo> = [];
-  tematicas: Array<Tematica> = [];
-  localidades: Array<Localidad> = [];
-  paises: Array<Pais> = [];
+    range = new FormGroup({
+      start: new FormControl<Date | null>(null),
+      end: new FormControl<Date | null>(null),
+    });
+
+    fav = regularHeart;
+    calendar = faCalendar;
+    earth = faEarthEurope;
+    persona = faUser;
+    selectedPais:any = "";
+    daysBetween:number = 1; 
+    cantidadPersonas:any;
+    chollos:Array<Chollo> = [];
+    tematicas: Array<Tematica> = [];
+    localidades: Array<Localidad> = [];
+    paises: Array<Pais> = [];
+    filters: Filters = {
+      dataInicio:"",
+      dataFinal:"",
+      localidad:"",
+      pais:this.selectedPais,
+      page:0,
+      size:10,
+      precioMax:"",
+      precioMin:"",
+      tematica:""
+  };
 
   ngOnInit(): void {
     this.cholloService.getAllChollos().subscribe(body => {
@@ -99,29 +124,48 @@ export class HomeComponent implements OnInit{
         pais = paises[i].value;
       }
     }
+    this.filters.localidad = localidad;
+    this.filters.pais = pais;
+    this.filters.tematica = tematica;
+    this.filters.precioMin = precioMin;
+    this.filters.precioMax = precioMax;
 
-    let filters: Filters = {
-      localidad: localidad,
-      pais: pais,
-      tematica: tematica,
-      precioMin: precioMin,
-      precioMax: precioMax,
-      dataInicio: '',
-      dataFinal: '',
-      page: 0,
-      size: 5
-    }
-
-    this.cholloService.getAllChollosFiltered(filters).subscribe(body => {
-      this.chollos = body.Chollos;
-      console.log(body);
-    });
+    this.filterChollo();
   }
   clickChollo(id:any){
-    this.router.navigate(["chollo/"+id]);
+    this.router.navigate(["chollo/"+id],{queryParams: {daysBetween:this.daysBetween, personas:this.cantidadPersonas}});
+  }
+
+  changePais(value:any){
+    this.selectedPais = value;
   }
 
   clickSearch(){
+    let start = this.range.controls.start.value;
+    let end = this.range.controls.end.value;
+    let inputPersonas:any = document.getElementById("inputPersonas");
+    if(inputPersonas != null){
+      this.cantidadPersonas = inputPersonas.value;
+    }
+    if(end != null && start != null){
+      this.daysBetween = end.getDate() - start.getDate()
+      console.log(this.daysBetween)
+    }
+    this.filters.pais = this.selectedPais;
+    
+    this.filterChollo()
+  }
 
+  filterChollo(){
+    this.cholloService.getAllChollosFiltered(this.filters).subscribe(body => {
+      this.chollos = body.Chollos;
+    });
+  }
+
+  calculatePrecio(precio:number|undefined):number{
+    if(precio != undefined){
+      return this.daysBetween * precio;
+    }
+    return 0;
   }
 }

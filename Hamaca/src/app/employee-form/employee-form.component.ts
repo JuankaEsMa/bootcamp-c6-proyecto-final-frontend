@@ -21,6 +21,7 @@ export class EmployeeFormComponent implements OnInit{
 
   chollo:Chollo = new Chollo();
   tematicas: Array<Tematica> = [];
+  tematicasChollo: Array<Tematica> = [];
 
   cholloForm = new FormGroup({
     id: new FormControl('', Validators.required),
@@ -30,8 +31,7 @@ export class EmployeeFormComponent implements OnInit{
     precioPersona: new FormControl('', Validators.required),
     cantidadPersonas: new FormControl('', Validators.required),
     fechaCaducidad: new FormControl('', Validators.required),
-    localidad: new FormControl('', Validators.required),
-    idEmpleado: new FormControl('', Validators.required)
+    localidad: new FormControl('', Validators.required)
   })
 
   constructor(private cholloService:CholloService, private tematicaService:TematicaService, 
@@ -60,35 +60,34 @@ export class EmployeeFormComponent implements OnInit{
 
   add(){
 
-    let tematica:number = 0;
-    let tematicas: any= document.getElementsByClassName("tematicaInput");
+    // this.chollo.id = parseInt(this.cholloForm.value.id!);
+    // this.chollo.titulo = this.cholloForm.value.titulo?.toString();
+    // this.chollo.imagen = this.cholloForm.value.imagen?.toString();
+    // this.chollo.descripcion = this.cholloForm.value.descripcion?.toString();
+    // this.chollo.precioPersona = parseFloat(this.cholloForm.value.precioPersona!);
+    // this.chollo.cantidadPersonas = parseInt(this.cholloForm.value.cantidadPersonas!);
+    // this.chollo.fechaCaducidad = new Date(this.cholloForm.value.fechaCaducidad!);
+    // this.chollo.localidad = this.cholloForm.value.localidad?.toString();
 
-    for (let i = 0; i < tematicas.length; i++) {
-      // console.log(tematicas[i].value);
-      if(tematicas[i].checked){
-        // tematica = tematicas[i].value;
-        tematica = i+1;
-      }
-    }
-
-    this.chollo.id = parseInt(this.cholloForm.value.id!);
-    this.chollo.titulo = this.cholloForm.value.titulo?.toString();
-    this.chollo.imagen = this.cholloForm.value.imagen?.toString();
-    this.chollo.descripcion = this.cholloForm.value.descripcion?.toString();
-    this.chollo.precioPersona = parseFloat(this.cholloForm.value.precioPersona!);
-    this.chollo.cantidadPersonas = parseInt(this.cholloForm.value.cantidadPersonas!);
-    this.chollo.fechaCaducidad = new Date(this.cholloForm.value.fechaCaducidad!);
-    this.chollo.localidad = this.cholloForm.value.localidad?.toString();
-    console.log(tematica);
-    this.chollo.tematicas = tematica;
-
-    // this.cholloService.addChollo(this.chollo).subscribe({
-    //   next: (result) => {
-    //           this.router.navigate(['/employee'])
-    //   },
-    //   error: (error) => {
-    //       this.sharedService.setMessage("Ha ocurrido un error");
+    // this.cholloService.addChollo(this.chollo).subscribe(
+    //   response => {
+    //     console.log(response);
     //   }
-    // });
+    // );
+
+    // let tematicasAdd: any= document.getElementsByClassName("tematicaInput");
+    // let tematica:string = '';
+
+    // for (let i = 0; i < tematicasAdd.length; i++) {
+    //   if(tematicasAdd[i].checked){
+    //     tematica = tematicasAdd[i].value;
+
+    //     this.cholloService.addTematicaInChollo(this.cholloForm.value.id!, tematica).subscribe(
+    //       response => {
+    //         console.log(response);
+    //       }
+    //     );
+    //   }
+    // }
   }
 }
