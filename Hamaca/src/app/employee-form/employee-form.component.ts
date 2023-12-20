@@ -5,7 +5,7 @@ import { Tematica } from '../models/tematica.model';
 import { CholloService } from '../services/chollo.service';
 import { TematicaService } from '../services/tematica.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SharedService } from '../services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-employee-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css'
 })
