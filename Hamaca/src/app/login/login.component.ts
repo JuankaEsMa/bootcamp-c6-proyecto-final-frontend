@@ -37,7 +37,6 @@ export class LoginComponent implements AfterViewInit {
             event.preventDefault()
             event.stopPropagation()
           }
-
           form.classList.add('was-validated')
         }, false)
       })
