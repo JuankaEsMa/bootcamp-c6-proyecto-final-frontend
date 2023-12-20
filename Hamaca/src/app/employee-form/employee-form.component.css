@@ -1,0 +1,33 @@
+.fondo{
+    background-color: var(--azul-flojo);
+    height: 139%;
+    display: flex;
+}
+
+.carpeta{
+    background-color: rgb(255, 255, 167);
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.encabezado{
+    background-color: var(--naranja);
+    border-radius: 15px;
+    margin:20px;
+    height:40px;
+    width: 400px;
+}
+
+.tematicas{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+textarea { 
+    resize:none;
+    height: 90px;
+}
+/* .imagen{
+    margin-top: 10px;
+    border: 1px solid black;
+} */

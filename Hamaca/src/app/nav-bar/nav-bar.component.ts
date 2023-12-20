@@ -15,7 +15,6 @@ export class NavBarComponent {
   token:string|null;
 
   constructor(public tokenService: TokenStorageService){
-    console.log(tokenService.getUser());
     this.token = this.tokenService.getToken();
   }
 

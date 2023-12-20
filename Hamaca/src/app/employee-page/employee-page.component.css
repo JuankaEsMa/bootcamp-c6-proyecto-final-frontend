@@ -1,0 +1,24 @@
+.fondo{
+    background-color: var(--azul-flojo);
+    height: 100%;
+}
+
+.encabezado{
+    background-color: var(--naranja);
+    border-radius: 15px;
+    margin:20px;
+    height:40px;
+    width: 300px;
+}
+
+/* .chollo-form{
+    width:40vh;
+    background-color: pink;
+    height: 400px;
+}
+
+.chollo-table{
+    /* width:100vh;
+    height: 400px;
+    background-color: blue;
+} */
