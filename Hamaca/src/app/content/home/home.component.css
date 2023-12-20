@@ -107,7 +107,7 @@
     min-width: 40%;
 }
 .backgroundImgHome{
-    background-image: url("assets/fotomuralHamaca.png");
+    background-image: url("../../../assets/fotomuralHamaca.png");
     background-size: cover;
 }
 
