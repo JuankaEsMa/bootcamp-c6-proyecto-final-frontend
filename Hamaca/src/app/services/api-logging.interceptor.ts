@@ -9,6 +9,10 @@ export const ApiLoggingInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const token = tokenStorageService.getToken();
-  const authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + token)})
-  return next(authReq);
+  if(token != null){
+    const authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + token)})
+    return next(authReq);
+  }else{
+    return next(req);
+  }
 }
