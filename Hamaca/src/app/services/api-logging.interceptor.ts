@@ -1,14 +1,14 @@
-import { HttpInterceptorFn, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { TokenStorageService } from './token-storage.service'
 
-export class ApiLoggingInterceptor implements HttpInterceptor {
+const tokenStorageService = new TokenStorageService();
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('token');
-    const authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + token)});
-    console.log(req);
-    console.log("Hola");
-
-    return next.handle(authReq);
+export const ApiLoggingInterceptor: HttpInterceptorFn = (req, next) => {
+  if (req.headers.get('skipInterceptor') === 'true') {
+    return next(req);
   }
-};
+
+  const token = tokenStorageService.getToken();
+  const authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + token)})
+  return next(authReq);
+}
