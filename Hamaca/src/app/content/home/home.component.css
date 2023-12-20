@@ -90,7 +90,7 @@
 .favButton{
     position: relative;
     z-index: 1;
-    color: white;
+    color: red;
     top: 15px;
     right: 15px;
     font-size: 50px;
@@ -107,7 +107,7 @@
     min-width: 40%;
 }
 .backgroundImgHome{
-    background-image: url("../../../assets/fotomuralHamaca.png");
+    background-image: url("assets/fotomuralHamaca.png");
     background-size: cover;
 }
 
