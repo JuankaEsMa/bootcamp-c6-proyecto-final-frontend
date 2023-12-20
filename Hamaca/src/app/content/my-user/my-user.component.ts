@@ -58,8 +58,10 @@ export class MyUserComponent{
         let direccion = this.userForm?.get('direccion');
         let telefono = this.userForm?.get('telefono');
         let fechaNacimiento = this.userForm?.get('fechaNacimiento');
-  
-        this.userService;
+        let user:User = {
+
+        }
+        // this.userService.updateUsuario();
         this.disabled = true;
         this.userForm?.disable();
       }
