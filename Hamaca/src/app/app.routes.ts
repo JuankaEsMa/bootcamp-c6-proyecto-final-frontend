@@ -5,7 +5,9 @@ import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ContentComponent } from './content/content.component';
-import { ClientPageComponent } from './client-page/client-page.component';
+import { EmployeePageComponent } from './employee-page/employee-page.component';
+import { EmployeeFormComponent} from './employee-form/employee-form.component';
+import { EmployeeFormEditComponent } from './employee-form-edit/employee-form-edit.component';
 import { clientGuard } from './guards/client.guard';
 import { MyUserComponent } from './content/my-user/my-user.component';
 
@@ -42,9 +44,19 @@ export const routes: Routes = [
         component: SignUpComponent
     },
     {
-        path:'client',
-        component: ClientPageComponent,
-        canActivate: [clientGuard]
+        path:'employee',
+        component: EmployeePageComponent,
+        // canActivate: [clientGuard]
+    },
+    {
+        path:'employee-form',
+        component: EmployeeFormComponent,
+        // canActivate: [clientGuard]
+    },
+    {
+        path:'employee-form-edit/:id',
+        component: EmployeeFormEditComponent,
+        // canActivate: [clientGuard]
     },
     {
         path:'404',

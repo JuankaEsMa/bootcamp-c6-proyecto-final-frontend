@@ -1,0 +1,90 @@
+<div class="container-fluid fondo">
+    <div class="carpeta">
+    <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="text-center encabezado">
+            <h1>Agregar nuevo chollo:</h1>
+        </div>
+    </div>        
+    <form [formGroup]="cholloForm" class="needs-validation" novalidate>
+        <div class="row">
+        <div class="col-3 mt-4 mb-2 px-2">
+        <p class="text-end">Id:</p>
+        </div>
+        <div class="col-8 mt-4">
+            <input id="id" type="number" formControlName="id" class="form-control custom-input custom-focus" placeholder="0" required>
+            <div class="invalid-feedback">Por favor, introduce un ID de chollo válido.</div>
+        </div>
+        <div class="col-3 mt-4 mb-2 px-2">
+        <p class="text-end">Titulo:</p>
+        </div>
+        <div class="col-8 mt-4 mb-2">
+            <input id="titulo" type="text" formControlName="titulo" class="form-control custom-input custom-focus" placeholder="Titulo" required>
+            <div class="invalid-feedback">Por favor, introduce un Titulo válido para el chollo.</div>
+        </div>
+
+        <div class="col-3 mt-4 mb-2 px-2">
+        <p class="text-end">Imagen:</p>
+        </div>
+        <div class="col-8 mt-4 mb-2 px-2">
+        <input id="imagen" type="text" formControlName="imagen" class="form-control custom-input custom-focus" placeholder="plantilla.jpg" required>
+        <div class="invalid-feedback">Por favor, introduce una direccion de imagen válida para el chollo.</div>
+        </div>
+        <div class="col-3 mt-4 mb-2 px-2">
+        <p class="text-end">Descripcion:</p>
+        </div>
+        <div class="col-8 mt-4 mb-2 px-2">
+            <textarea #formAnswer type="text" id="descripcion" formControlName="descripcion" class="form-control" placeholder="Descripcion" required></textarea>
+            <div class="invalid-feedback">Por favor, introduce una descripción para el chollo.</div>
+        </div>
+        <div class="col-3 mt-4 mb-2 px-2">
+            <p class="text-end">Precio por Persona:</p>
+        </div>
+        <div class="col-8 mt-4">
+            <input id="precioPersona" type="text" formControlName="precioPersona" class="form-control" placeholder="0" required>
+            <div class="invalid-feedback">Por favor, introduce el precio por persona.</div>
+        </div>
+        <div class="col-3 mt-4 mb-2 px-2">
+            <p class="text-end">Cantidad de Personas:</p>
+        </div>
+        <div class="col-8 mt-4 mb-2">
+            <input id="cantidadPersonas" type="number" formControlName="cantidadPersonas" class="form-control" placeholder="0" required>
+            <div class="invalid-feedback">Por favor, introduce la cantidad de personas del chollo.</div>
+        </div>
+        <div class="col-3 mt-4 mb-2 px-2">
+            <p class="text-end">Fecha de caducidad:</p>
+        </div>
+        <div class="col-8 mt-4 mb-2 px-2">
+            <input id="fechaCaducidad" type="text" formControlName="fechaCaducidad" class="form-control" placeholder="AAAA-MM-DD" required>
+            <div class="invalid-feedback">Por favor, introduce la fecha de caducidad del chollo.</div>
+        </div>
+        <div class="col-3 mt-4 mb-2 px-2">
+            <p class="text-end">Localidad:</p>
+        </div>
+        <div class="col-8 mt-4 mb-2 px-2">
+            <input id="localidad" type="text" formControlName="localidad" class="form-control" placeholder="Localidad (Id)" required>
+            <div class="invalid-feedback">Por favor, introduce la localidad del chollo.</div>
+        </div>
+        <div class="col-3 mt-4 mb-2 px-2">
+            <p class="text-end">Temáticas:</p>
+        </div>
+        <div class="col-8 mt-4 mb-2 px-2 tematicas">
+            @for (tematica of tematicas; track tematica.id) {
+                <div class="form-check">
+                    <input class="form-check-input tematicaInput" type="radio" name="flexRadioDefault" value="{{tematica.nombre}}" required>
+                    <label class="form-check-label" for="flexRadioDefault1">{{tematica.nombre}}</label>
+                    <!-- <div class="invalid-feedback">More example invalid feedback text</div>                  -->
+                    <!-- <input class="form-check-input tematicaInput" type="checkbox" value="{{tematica.nombre}}">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{tematica.nombre}}
+                    </label> -->
+                    <div class="invalid-feedback">Elije alguno de estos campos para continuar</div>                 
+                </div>
+            }
+        </div>
+        <div class="col-12 mt-4 mb-4 text-center">
+        <button class="btn btn-primary rounded border-0" type="submit" (click)="add()">Agregar</button>
+        </div>
+        </div>
+    </form>
+</div>
+</div>

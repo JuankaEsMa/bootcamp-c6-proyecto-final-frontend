@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 
-const url:string = 'https://proyecto-final-backend-production-c6e8.up.railway.app';
+const url:string = 'https://proyecto-final-backend-production-c6e8.up.railway.app/';
 const jsonOptions = {headers: new HttpHeaders({'skipInterceptor': 'true', 'Content-Type':'application/json'})}
 
 @Injectable({
