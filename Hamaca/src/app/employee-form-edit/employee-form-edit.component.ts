@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Chollo } from '../models/chollo.model';
 import { Tematica } from '../models/tematica.model';
 import { Localidad } from '../models/localidad.model';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-employee-form-edit',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './employee-form-edit.component.html',
   styleUrl: './employee-form-edit.component.css'
 })
@@ -41,18 +41,17 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     this.tematicaService.getAllTematicas().subscribe(tematicas => {
       this.tematicas = tematicas;
-    })
 
-    this.route.params.subscribe(param => 
-      this.id = param['id']);
-    this.set_inputs();
+      this.route.params.subscribe(param => 
+        this.id = param['id']);
+        this.set_inputs();
+    })
   }
 
   set_inputs(){
     this.cholloService.getCholloById(this.id).subscribe((data:any) => {
       
       this.chollo = data;
-    })
       this.id = this.chollo.id;
       this.localidad = this.chollo.localidad;
       this.tematicasChollo = this.chollo.tematicas;
@@ -79,6 +78,7 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
               }
           }
         }
+    })
   }
 
   ngAfterViewInit() {
@@ -114,30 +114,30 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
   }
 
   update(){
-    this.setCholloValues();
+    // this.setCholloValues();
 
-    console.log( this.tematica.id?.toString() ?? "");
+    // console.log( this.tematica.id?.toString() ?? "");
 
-    this.cholloService.updateChollo(this.id, this.chollo).subscribe(
-      response => {
-        console.log(response);
-      }
-    );
+    // this.cholloService.updateChollo(this.id, this.chollo).subscribe(
+    //   response => {
+    //     console.log(response);
+    //   }
+    // );
 
-    let tematicasAdd: any= document.getElementsByClassName("tematicaInput");
-    let tematica:string = '';
+    // let tematicasAdd: any= document.getElementsByClassName("tematicaInput");
+    // let tematica:string = '';
 
-    for (let i = 0; i < tematicasAdd.length; i++) {
-      if(tematicasAdd[i].checked){
-        tematica = tematicasAdd[i].value;
+    // for (let i = 0; i < tematicasAdd.length; i++) {
+    //   if(tematicasAdd[i].checked){
+    //     tematica = tematicasAdd[i].value;
 
-        this.cholloService.addTematicaInChollo(this.cholloForm.value.id!, tematica).subscribe(
-          response => {
-            console.log(response);
-          }
-        );
-      }
-    }
+    //     this.cholloService.addTematicaInChollo(this.cholloForm.value.id!, tematica).subscribe(
+    //       response => {
+    //         console.log(response);
+    //       }
+    //     );
+    //   }
+    // }
   }
 
 }
