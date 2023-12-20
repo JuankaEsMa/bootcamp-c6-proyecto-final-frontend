@@ -49,11 +49,10 @@ export class LoginComponent implements AfterViewInit {
 
     this.service.login(this.userForm.value.email, this.userForm.value.password).subscribe({
       next: (result) => {
-          if (result.token) {
-              console.log(result);
-              this.tokenService.saveToken(result.token)
-              this.router.navigate(['home'])
-          }
+        if (result.token) {
+            this.tokenService.saveToken(result.token)
+            this.router.navigate(['home'])
+        }
       },
       error: (error) => {
         if (error.status === 403) {
