@@ -9,7 +9,7 @@
         <div class="col-12-md description">
                 <div class="tag d-flex justify-content-center align-items-center">
                     <div class="tag-text">
-                        <b>{{chollo.precioPersona}}€/pers.</b>
+                        <b>{{calculatePrecio(chollo.precioPersona)}}€/pers.</b>
                     </div>
                 </div>
                 <br>
@@ -18,7 +18,7 @@
                 <p>{{chollo.descripcion}}</p>
                 <p class='text-right'>Oferta hasta para {{chollo.cantidadPersonas}} personas.</p>
                 <div class="d-flex justify-content-center reservar">
-                    <button class="btn btn-primary login_buttons" type="button">Reservar ahora</button>
+                    <button class="btn btn-primary login_buttons" type="button" (click)="reservar(chollo.id)">Reservar ahora</button>
                 </div>                 
                 <br>
                 <div class="date-tag d-flex justify-content-center">

@@ -10,9 +10,7 @@ export class TokenStorageService {
   constructor() { }
 
   signOut():void {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.clear();
-    }
+    localStorage.clear();
   }
 
   public saveToken(token:string):void{

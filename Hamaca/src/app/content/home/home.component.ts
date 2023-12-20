@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCalendar, faUser, faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import { IconDefinition, faCalendar, faUser, faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faEarthEurope, faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; 
 import { Chollo } from '../../models/chollo.model';
 import { CholloService } from '../../services/chollo.service';
@@ -19,6 +19,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { DateAdapter } from '@angular/material/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UsuarioService } from '../../services/user.service';
+import { error } from 'console';
+import { User } from '../../models/user.model';
+import { subscribe } from 'diagnostics_channel';
 
 
 
@@ -33,23 +37,23 @@ export class HomeComponent implements OnInit{
 
   constructor(private cholloService: CholloService, private tematicaService: TematicaService, 
     private localidadService:LocalidadService, private paisService:PaisService, private router: Router,
-    private dateAdapter: DateAdapter<Date>){
-      this.dateAdapter.setLocale('es-ES')
-    }
+    private userService:UsuarioService){}
 
     range = new FormGroup({
       start: new FormControl<Date | null>(null),
       end: new FormControl<Date | null>(null),
     });
+    usuario: User|undefined = undefined;
+    noClickFav = regularHeart;
+    clickedFav = solidHeart;
 
-    fav = regularHeart;
-    calendar = faCalendar;
-    earth = faEarthEurope;
-    persona = faUser;
+    isLogged:boolean = false;
     selectedPais:any = "";
     daysBetween:number = 1; 
     cantidadPersonas:any;
     chollos:Array<Chollo> = [];
+    chollosFavoritos:Array<Chollo> = []
+    favClicked: Map<number,IconDefinition> = new Map<number, IconDefinition>;
     tematicas: Array<Tematica> = [];
     localidades: Array<Localidad> = [];
     paises: Array<Pais> = [];
@@ -68,7 +72,39 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.cholloService.getAllChollos().subscribe(body => {
       this.chollos = body.Chollos;
-      console.log(this.chollos);
+      this.userService.getMyCliente().subscribe({
+          next:(result)=>{
+            this.chollosFavoritos = result.chollosFavoritos;
+            console.log(this.chollosFavoritos);
+            for (let i = 0; i < this.chollos.length; i++) {
+              const element = this.chollos[i];
+              let isFavorite = false;
+              if(element.id != undefined){
+              for (let i = 0; i < this.chollosFavoritos.length; i++) {
+                if(this.chollosFavoritos[i].id == element.id){
+                  isFavorite = true
+                }
+              }
+              if(isFavorite){
+                this.favClicked.set(element.id, this.clickedFav);
+              }else{
+                this.favClicked.set(element.id, this.noClickFav);
+              }
+            }
+            }
+            this.isLogged = true;
+          },
+          error:(error)=>{
+            for (let i = 0; i < this.chollos.length; i++) {
+              const element = this.chollos[i];
+              if(element.id != undefined){
+                this.favClicked.set(element.id, this.noClickFav);
+              }
+            }
+            this.isLogged = false;
+          }
+      })
+
     })
     this.tematicaService.getAllTematicas().subscribe(tematicas => {
       this.tematicas = tematicas;
@@ -82,10 +118,29 @@ export class HomeComponent implements OnInit{
   }
 
   favClick(id:any){
-    if(this.fav == solidHeart){
-      this.fav = regularHeart;
+    if(this.isLogged){
+      if(this.favClicked.get(id) == this.noClickFav){
+        this.userService.saveCholloFavorite(id).subscribe({
+          next: (result) => {
+            console.log(result)
+            this.favClicked.set(id,this.clickedFav);
+          },
+          error: (error) => {
+            console.log(error);
+            if (error.status === 403) {
+              this.router.navigate(['login']);
+            }else if(error.status === 200){
+              this.favClicked.set(id,this.clickedFav);
+            }else{
+              console.log(error.status);
+            }
+          }
+        });
+      }else{
+        this.favClicked.set(id,this.noClickFav);
+      }
     }else{
-      this.fav = solidHeart;
+      this.router.navigate(['login']);
     }
   }
 
@@ -159,6 +214,12 @@ export class HomeComponent implements OnInit{
   filterChollo(){
     this.cholloService.getAllChollosFiltered(this.filters).subscribe(body => {
       this.chollos = body.Chollos;
+      for (let i = 0; i < this.chollos.length; i++) {
+        let id = this.chollos[i].id;
+        if(id != undefined){
+          this.favClicked.set(id,this.noClickFav)
+        }
+      }
     });
   }
 
@@ -167,5 +228,14 @@ export class HomeComponent implements OnInit{
       return this.daysBetween * precio;
     }
     return 0;
+  }
+
+  getFavIcon(id:number):IconDefinition{
+    let icon = this.favClicked.get(id);
+    if(icon != undefined){
+      return icon;
+    }else{
+      return this.noClickFav;
+    }
   }
 }

@@ -9,6 +9,7 @@ import { EmployeePageComponent } from './employee-page/employee-page.component';
 import { EmployeeFormComponent} from './employee-form/employee-form.component';
 import { EmployeeFormEditComponent } from './employee-form-edit/employee-form-edit.component';
 import { clientGuard } from './guards/client.guard';
+import { MyUserComponent } from './content/my-user/my-user.component';
 
 
 export const routes: Routes = [
@@ -23,6 +24,10 @@ export const routes: Routes = [
             {
                 path:'chollo/:id',
                 component:CholloDetailComponent
+            },
+            {
+                path: 'my-user',
+                component: MyUserComponent
             }
         ]
     },

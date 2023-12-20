@@ -1,11 +1,11 @@
 export class User {
     id?:number;
-    titulo?:string;
-    imagen?:string;
-    precioPersona?:number;
-    cantidadPersonas?:number;
-    descripcion?:string;
-    fechaCaducidad?:Date;
+    nombre?:string;
+    apellidos?:string;
+    telefono?:string;
+    dni?:string;
+    direccion?:string;
+    email?:string;
+    fechaNacimiento?:Date;
     deleted?:boolean;
-    localidad?:string;
 }

@@ -13,6 +13,11 @@
     font-weight: bold;
     background-color: var(--naranja);
     color: white;
+    cursor: pointer;
+    user-select: none;
+}
+.btnSearch:hover{
+    opacity: 80%;
 }
 .containerBtnSearch{
     display: flex;
@@ -70,7 +75,7 @@
     background-color: var(--azul-medio);
     height: 40px;
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 .filtroContainer, .cholloContainer{
     background-color: var(--azul-flojo);
@@ -81,6 +86,19 @@
     text-align: end;
     font-size: 50px;
     padding-right: 10px;
+}
+.favButton{
+    position: relative;
+    z-index: 1;
+    color: white;
+    top: 15px;
+    right: 15px;
+    font-size: 50px;
+}
+.containerFavClick{
+    height: 0;
+    display: flex;
+    flex-direction: row-reverse;
 }
 .containerPrecios{
     margin: 0.5em;
@@ -120,6 +138,9 @@
 }
 .widthInputsSearch{
     width: 200px;
+}
+.btnBuscar{
+    user-select: none;
 }
 @media (min-width: 768px ) {
     .containerHeaderHome{

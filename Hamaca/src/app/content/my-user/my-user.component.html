@@ -1,1 +1,56 @@
-<p>my-user works!</p>
+<div class="centerItem m-5">
+@if (usuario != null && userForm != null) {
+    <form [formGroup]="userForm" class="container needs-validation" novalidate>
+        <div class="row mb-3">
+            <label class="form-label">Nombre</label>
+            <input formControlName="nombre" [disabled]="disabled" type="text" class="form-control">
+            <div class="invalid-feedback"></div>
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">Apellidos</label>
+            <input formControlName="apellidos" [disabled]="disabled" type="text" class="form-control">
+            <div class="invalid-feedback"></div>
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">Email address</label>
+            <input formControlName="email" [disabled]="disabled" type="email" class="form-control">
+            <div class="invalid-feedback"></div>
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">DNI</label>
+            <input formControlName="dni" type="text" class="form-control">
+            <div class="invalid-feedback"></div>
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">Direccion</label>
+            <input formControlName="direccion" [disabled]="disabled" type="text" class="form-control">
+            <div class="invalid-feedback"></div>
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">Telefono</label>
+            <input formControlName="telefono" [disabled]="disabled" type="text" class="form-control">
+            <div class="invalid-feedback"></div>
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">Fecha Nacimiento</label>
+            <input formControlName="fechaNacimiento" [disabled]="disabled" type="Date" class="form-control">
+            <div class="invalid-feedback"></div>
+        </div>
+        <div class="row mb-3">
+            @if (disabled) {
+                <div class="col-12">
+                    <button (click)="edit()" class="btn btn-warning ms-auto me-auto d-block">Editar</button>
+                </div>
+            }@else {
+                <div class="col-12 d-flex">
+                    <button (click)="cancel()" class="btn btn-danger  ms-auto me-auto d-block">Cancelar</button> 
+                    <button (click)="guardar()" type="submit" class="btn btn-primary  ms-auto me-auto d-block">Guardar</button> 
+                </div>
+            }
+        </div>
+      </form>
+}@else {
+
+}
+</div>
+
