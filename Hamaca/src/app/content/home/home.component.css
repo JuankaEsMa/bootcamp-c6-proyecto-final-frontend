@@ -1,0 +1,149 @@
+.btnFiltro{
+    padding: 1em;
+    border-radius: 10px;
+    margin: 10px;
+    min-width: 215px;
+}
+.btnSearch{
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--naranja);
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+.btnSearch:hover{
+    opacity: 80%;
+}
+.containerBtnSearch{
+    display: flex;
+    justify-content: center;
+}
+
+.filtroContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin:auto auto;
+    padding: 2em;
+    font-weight: bold;
+}
+.cholloContainer{
+    padding: 0;
+}
+.imgCholloContainer{
+    display: block;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 350px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px 10px 0px 0px;
+    overflow: hidden;
+}
+.imgChollo{
+    height: 100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.cholloPrecio{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: var(--naranja);
+    top: -200%;
+    right: 25px;
+    border-radius: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-25deg);
+}
+.precioFont{
+    font-size: 25px;
+    font-weight: bold;
+}
+.cholloTimeExpiration{
+    background-color: var(--azul-medio);
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.filtroContainer, .cholloContainer{
+    background-color: var(--azul-flojo);
+}
+.cholloFav{
+    color: white;
+    width: 100%;
+    text-align: end;
+    font-size: 50px;
+    padding-right: 10px;
+}
+.favButton{
+    position: relative;
+    z-index: 1;
+    color: white;
+    top: 15px;
+    right: 15px;
+    font-size: 50px;
+}
+.containerFavClick{
+    height: 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.containerPrecios{
+    margin: 0.5em;
+}
+.minWidthLabelPrecio{
+    min-width: 40%;
+}
+.backgroundImgHome{
+    background-image: url("../../../assets/fotomuralHamaca.png");
+    background-size: cover;
+}
+
+.imgChollo{
+    height: 100%;
+}
+
+.containerHeaderHome{
+    background-color: white;
+    font-size: 12px;
+    width: 100%;
+}
+.homeCalendarIcon{
+    font-size: 2em;
+}
+.containerHeaderIconSearch{
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+}
+.centerItem{
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+}
+.link{
+    cursor: pointer
+}
+.widthInputsSearch{
+    width: 200px;
+}
+.btnBuscar{
+    user-select: none;
+}
+@media (min-width: 768px ) {
+    .containerHeaderHome{
+        width: 60%;
+    }
+}

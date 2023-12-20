@@ -1,1 +1,48 @@
-<p>chollo-detail works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12-md">
+            <div class="d-flex justify-content-center">
+                <img src= {{chollo.imagen}} class="img-fluid" alt="Responsive image" width="650" height="370">    
+            </div>
+    </div>
+    <div class="row d-flex justify-content-center information">
+        <div class="col-12-md description">
+                <div class="tag d-flex justify-content-center align-items-center">
+                    <div class="tag-text">
+                        <b>{{calculatePrecio(chollo.precioPersona)}}€/pers.</b>
+                    </div>
+                </div>
+                <br>
+                <h5>{{chollo.titulo}}</h5>
+                <hr>
+                <p>{{chollo.descripcion}}</p>
+                <p class='text-right'>Oferta hasta para {{chollo.cantidadPersonas}} personas.</p>
+                <div class="d-flex justify-content-center reservar">
+                    <button class="btn btn-primary login_buttons" type="button" (click)="reservar(chollo.id)">Reservar ahora</button>
+                </div>                 
+                <br>
+                <div class="date-tag d-flex justify-content-center">
+                    <div>
+                        <p>Valida hasta el {{chollo.fechaCaducidad}}</p>                                            
+                    </div>
+                </div>
+            </div>
+
+            <div class="location">
+                <h6>Alojamiento:</h6>
+                <hr>
+                <h6>{{localidad.nombre}}</h6>             
+                <!-- <p>{{chollo.localidad.descripcion}}</p> -->
+            </div>
+
+            <div class="location">
+                <h6>Tematicas:</h6>
+                <hr>
+                @for (tematica of tematicas; track $index) {
+                    <h6>- {{tematica.nombre}}</h6>
+                }
+                <!-- <p>{{chollo.localidad.descripcion}}</p> -->
+            </div>
+        </div>
+    </div>
+</div>
