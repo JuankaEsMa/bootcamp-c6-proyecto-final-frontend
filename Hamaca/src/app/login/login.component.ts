@@ -58,6 +58,7 @@ export class LoginComponent implements AfterViewInit {
         if (error.status === 403) {
           this.sharedService.setMessage("Usuario o contraseña incorrectos");
         } else {
+          console.log(error);
           this.sharedService.setMessage("Ha ocurrido un error");
         }
         this.showToast();

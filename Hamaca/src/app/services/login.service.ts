@@ -15,7 +15,7 @@ export class LoginService {
   http = inject(HttpClient);
 
   login(username:any, password:any):Observable<any> {
-        return this.http.post(`${url}/login`,{username,password}, jsonOptions).pipe(
+        return this.http.post(`${url}login`,{username,password}, jsonOptions).pipe(
           catchError(error => {
             console.error(error);
             throw error;
