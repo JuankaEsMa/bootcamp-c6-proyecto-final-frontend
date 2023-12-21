@@ -4,8 +4,7 @@
 }
 
 .encabezado{
-    background-color: var(--naranja);
-    border-radius: 15px;
+    background-color: white;
     margin:20px;
     height:40px;
     width: 300px;

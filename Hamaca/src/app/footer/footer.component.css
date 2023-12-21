@@ -1,0 +1,12 @@
+.pie{
+    background-color: var(--azul-medio);
+    height: 160px;
+}
+
+.logo{
+    margin: 30px;
+}
+
+.navegacion{
+    margin-top: 30px;
+}

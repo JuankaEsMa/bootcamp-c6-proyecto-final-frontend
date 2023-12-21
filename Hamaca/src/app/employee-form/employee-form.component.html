@@ -1,8 +1,11 @@
 <div class="container-fluid fondo">
     <div class="carpeta">
-    <div class="col-12 d-flex align-items-center justify-content-center">
-        <button class="btn btn-warning rounded border-0" type="submit" routerLink="/employee">Volver</button>
-        <div class="text-center encabezado">
+    <div class="col-12 d-flex">
+        <div class="float-end mb-1">
+            <button class="btn btn-warning rounded border-0" type="submit" routerLink="/employee">Volver</button>
+        </div>
+
+        <div class="text-center align-items-center justify-content-center encabezado">
             <h1>Agregar nuevo chollo:</h1>
         </div>
     </div>        
@@ -64,20 +67,51 @@
             <p class="text-end">Localidad:</p>
         </div>
         <div class="col-8 mt-4 mb-2 px-2">
-            <input id="localidad" type="text" formControlName="localidad" class="form-control" placeholder="Localidad (Id)" required>
-            <div class="invalid-feedback">Por favor, introduce la localidad del chollo.</div>
+            <mat-form-field class="widthInputsSearch">
+                <mat-label>Localidad</mat-label>
+                <mat-select (selectionChange)="setLocalidad($event.value)" [formControl]="localidadForm" required>
+                    @for (localidad of localidades; track localidad.id) {
+                    <mat-option [value]="localidad">{{localidad.nombre}}</mat-option>
+                    }
+                </mat-select>
+                @if (!localidadForm.valid) {
+                    <mat-error>Por favor, introduce la localidad del chollo.</mat-error>}
+            </mat-form-field>
         </div>
         <div class="col-3 mt-4 mb-2 px-2">
             <p class="text-end">Temáticas:</p>
         </div>
-        <div class="col-8 mt-4 mb-2 px-2 tematicas">
-            @for (tema of tematicas; track tema.id) {
-                <div class="form-check">
-                    <input class="form-check-input tematicaInput" type="checkbox" name="tema" value="{{tema.nombre}}" required>
-                    <label class="form-check-label" for="flexRadioDefault1">{{tema.nombre}}</label>
-                    <div class="invalid-feedback">Elije alguno de estos campos para continuar</div>                 
+        <div class="col-8 mt-4 mb-2 px-2">
+
+            <mat-form-field>
+                <mat-select [formControl]="tematicaForm" placeholder="Tematica" multiple required>
+                    <mat-option *ngFor="let tema of tematicas" [value]="tema.id">
+                        {{tema.nombre}}
+                    </mat-option>
+                </mat-select>
+                @if (!tematicaForm.valid) {
+                    <mat-error>Por favor, introduce la tematica/s del chollo.</mat-error>}
+            </mat-form-field>
+
+            <!-- <form [formGroup]="tematicaForm">
+                <label for="options">Options:</label>
+                <div *ngFor="let tema of tematicas">
+                    <label>
+                        <input type="checkbox" name="options" value="{{tema.id}}" (change)="onCheckChange($event)"/>
+                        {{tema.nombre}}
+                    </label>
                 </div>
-            }
+            </form> -->
+
+            <!-- <form [formGroup]="tematicaForm">
+                @for (tema of tematicas; track tema.id) {
+                    <div class="form-check">
+                        <input class="form-check-input tematicaInput" type="checkbox" name="tema" value="{{tema.nombre}}" required>
+                        <label class="form-check-label" for="flexRadioDefault1">{{tema.nombre}}</label>
+                    </div>
+                }
+                <div class="invalid-feedback">Por favor, introduce la fecha de caducidad del chollo.</div>
+            </form> -->
         </div>
         <div class="col-12 mt-4 mb-4 text-center">
             <button class="btn btn-primary rounded border-0" type="submit" (click)="add()">Agregar</button>

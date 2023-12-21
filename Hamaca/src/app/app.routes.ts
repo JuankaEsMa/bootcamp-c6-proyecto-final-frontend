@@ -10,6 +10,7 @@ import { EmployeeFormComponent} from './employee-form/employee-form.component';
 import { EmployeeFormEditComponent } from './employee-form-edit/employee-form-edit.component';
 import { clientGuard } from './guards/client.guard';
 import { MyUserComponent } from './content/my-user/my-user.component';
+import { FavoritosComponent } from './content/favoritos/favoritos.component';
 
 
 export const routes: Routes = [
@@ -27,7 +28,13 @@ export const routes: Routes = [
             },
             {
                 path: 'my-user',
-                component: MyUserComponent
+                component: MyUserComponent,
+                canActivate: [clientGuard]
+            },
+            {
+                path:'favoritos',
+                component: FavoritosComponent,
+                canActivate: [clientGuard]
             }
         ]
     },
