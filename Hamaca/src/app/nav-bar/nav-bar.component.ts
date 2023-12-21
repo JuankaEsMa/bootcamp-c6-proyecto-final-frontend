@@ -30,7 +30,7 @@ export class NavBarComponent {
 
   logout(){
     this.tokenService.signOut();
-    this.router.navigate(['/home'])
+    this.router.navigate([''])
     this.user = undefined;
   }
   getUserInitial(){
