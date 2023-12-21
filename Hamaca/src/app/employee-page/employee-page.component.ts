@@ -26,7 +26,7 @@ export class EmployeePageComponent implements OnInit{
   }
 
   obtenerChollos(){
-    this.cholloService.getAllChollos().subscribe(body => {
+    this.cholloService.getChollos().subscribe(body => {
       this.chollos = body.Chollos;
     })
   }

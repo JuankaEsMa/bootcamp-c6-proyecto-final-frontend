@@ -35,8 +35,9 @@
         </div>
         <div class="row mb-3">
             @if (disabled) {
-                <div class="col-12">
-                    <button (click)="edit()" class="btn btn-warning ms-auto me-auto d-block">Editar</button>
+                <div class="col-12 d-flex">
+                    <button (click)="edit()" class="btn btn-warning ms-auto me-auto">Editar</button>
+                    <button (click)="delete()" class="btn btn-danger ms-auto me-auto">Delete</button>
                 </div>
             }@else {
                 <div class="col-12 d-flex">

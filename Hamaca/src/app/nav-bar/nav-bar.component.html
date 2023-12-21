@@ -6,33 +6,20 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse access" id="navbarToggler">
-      <!-- <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="chollo/1">Destino</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Temática</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Categoría</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">País</a>
-        </li>
-      </ul> -->
+    <div class="collapse navbar-collapse access m-0" id="navbarToggler">
       <form class="d-flex centerItem ms-auto">
         @if (user == null) {
           <button class="btn btn-sm login_buttons" type="button"routerLink="sign-up">Crear cuenta</button>
           <button class="btn btn-sm login_buttons" type="button" routerLink="login">Iniciar sesión</button>
         }@else {
           <div class="dropdown d-flex justify-content-center align-items-center flex-wrap w-100">
-            <button class="btn btn-sm login_buttons" type="button" (click)="logout()">Log Out</button>
             <div class="btn btn-sm user_button login_buttons rounded-5" data-bs-toggle="dropdown" aria-expanded="false">{{getUserInitial()}}</div>
             <ul class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" routerLink="/my-user">Mi usuario</a></li>
               <li><a class="dropdown-item" routerLink="/favoritos">Favoritos</a></li>
               <li><a class="dropdown-item" href="#">Reservas</a></li>
+              <li class="btn btn-sm login_buttons" type="button" (click)="logout()">Log Out</li>
+
             </ul>
           </div>
         }
