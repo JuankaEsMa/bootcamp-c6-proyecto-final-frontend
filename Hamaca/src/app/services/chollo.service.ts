@@ -10,17 +10,19 @@ import { Filters } from '../models/filters.model';
 export class CholloService {
 
   constructor(private httpClient:HttpClient) { }
-  getAllChollos():Observable<any>{
-    return this.httpClient.get("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo");
+  getChollos(filters?:Filters):Observable<any>{
+    let peticion;
+    if(filters){
+      peticion = "https://proyecto-final-backend-production-c6e8.up.railway.app/chollo?localidad="
+      +filters.localidad+"&tematica="+filters.tematica+"&pais="+filters.pais+"&dataInicio="+filters.dataInicio+"&dataFinal="
+      +filters.dataFinal+"&precioMin="+filters.precioMin+"&precioMax="+filters.precioMax+"&page="+filters.page+"&size="+filters.size;
+    }else{
+      peticion = "https://proyecto-final-backend-production-c6e8.up.railway.app/chollo";
+    }
+    return this.httpClient.get(peticion);
   }
   getCholloById(id:string):Observable<Chollo>{
     return this.httpClient.get("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/"+id);
-  }
-  getAllChollosFiltered(filters:Filters):Observable<any>{
-    let url:string = "https://proyecto-final-backend-production-c6e8.up.railway.app/chollo?localidad="
-    +filters.localidad+"&tematica="+filters.tematica+"&pais="+filters.pais+"&dataInicio="+filters.dataInicio+"&dataFinal="
-    +filters.dataFinal+"&precioMin="+filters.precioMin+"&precioMax="+filters.precioMax+"&page="+filters.page+"&size="+filters.size;
-    return this.httpClient.get<any>(url);
   }
   addChollo(chollo:Chollo){
     return this.httpClient.post("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/", chollo);

@@ -23,6 +23,8 @@ import { UsuarioService } from '../../services/user.service';
 import { error } from 'console';
 import { User } from '../../models/user.model';
 import { subscribe } from 'diagnostics_channel';
+import { SharedService } from '../../services/shared.service';
+import { finalize } from 'rxjs';
 
 
 
@@ -37,7 +39,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private cholloService: CholloService, private tematicaService: TematicaService, 
     private localidadService:LocalidadService, private paisService:PaisService, private router: Router,
-    private userService:UsuarioService){}
+    private userService:UsuarioService, private sharedService: SharedService){}
 
     range = new FormGroup({
       start: new FormControl<Date | null>(null),
@@ -47,6 +49,9 @@ export class HomeComponent implements OnInit{
     noClickFav = regularHeart;
     clickedFav = solidHeart;
 
+    page = 0;
+    size = 10;
+    totalPages = 0;
     isLogged:boolean = false;
     selectedPais:any = "";
     daysBetween:number = 1; 
@@ -62,50 +67,30 @@ export class HomeComponent implements OnInit{
       dataFinal:"",
       localidad:"",
       pais:this.selectedPais,
-      page:0,
-      size:10,
+      page:this.page,
+      size:this.size,
       precioMax:"",
       precioMin:"",
       tematica:""
   };
 
   ngOnInit(): void {
-    this.cholloService.getAllChollos().subscribe(body => {
-      this.chollos = body.Chollos;
-      this.userService.getMyCliente().subscribe({
-          next:(result)=>{
-            this.chollosFavoritos = result.chollosFavoritos;
-            console.log(this.chollosFavoritos);
-            for (let i = 0; i < this.chollos.length; i++) {
-              const element = this.chollos[i];
-              let isFavorite = false;
-              if(element.id != undefined){
-              for (let i = 0; i < this.chollosFavoritos.length; i++) {
-                if(this.chollosFavoritos[i].id == element.id){
-                  isFavorite = true
-                }
-              }
-              if(isFavorite){
-                this.favClicked.set(element.id, this.clickedFav);
-              }else{
-                this.favClicked.set(element.id, this.noClickFav);
-              }
-            }
-            }
-            this.isLogged = true;
-          },
-          error:(error)=>{
-            for (let i = 0; i < this.chollos.length; i++) {
-              const element = this.chollos[i];
-              if(element.id != undefined){
-                this.favClicked.set(element.id, this.noClickFav);
-              }
-            }
-            this.isLogged = false;
+    this.userService.getMyCliente().pipe(finalize(()=>this.getChollos()))
+    .subscribe({
+      next:(result)=>{
+        this.chollosFavoritos = result.chollosFavoritos;
+        this.isLogged = true;
+      },
+      error:(error)=>{
+        for (let i = 0; i < this.chollos.length; i++) {
+          const element = this.chollos[i];
+          if(element.id != undefined){
+            this.favClicked.set(element.id, this.noClickFav);
           }
-      })
-
-    })
+        }
+        this.isLogged = false;
+      }
+  })
     this.tematicaService.getAllTematicas().subscribe(tematicas => {
       this.tematicas = tematicas;
     })
@@ -131,12 +116,20 @@ export class HomeComponent implements OnInit{
               this.router.navigate(['login']);
             }else if(error.status === 200){
               this.favClicked.set(id,this.clickedFav);
-            }else{
-              console.log(error.status);
+            }else if(error.status === 409){
+              //No debería de ocurrir nunca
             }
           }
         });
       }else{
+        this.userService.removeCholloFavorite(id).subscribe({
+          next:(result) =>{
+            console.log(result);
+          },
+          error:(error)=>{
+            console.log(error);
+          }
+        });
         this.favClicked.set(id,this.noClickFav);
       }
     }else{
@@ -185,7 +178,7 @@ export class HomeComponent implements OnInit{
     this.filters.precioMin = precioMin;
     this.filters.precioMax = precioMax;
 
-    this.filterChollo();
+    this.getChollos(this.filters);
   }
   clickChollo(id:any){
     this.router.navigate(["chollo/"+id],{queryParams: {daysBetween:this.daysBetween, personas:this.cantidadPersonas}});
@@ -208,19 +201,7 @@ export class HomeComponent implements OnInit{
     }
     this.filters.pais = this.selectedPais;
     
-    this.filterChollo()
-  }
-
-  filterChollo(){
-    this.cholloService.getAllChollosFiltered(this.filters).subscribe(body => {
-      this.chollos = body.Chollos;
-      for (let i = 0; i < this.chollos.length; i++) {
-        let id = this.chollos[i].id;
-        if(id != undefined){
-          this.favClicked.set(id,this.noClickFav)
-        }
-      }
-    });
+    this.getChollos(this.filters)
   }
 
   calculatePrecio(precio:number|undefined):number{
@@ -237,5 +218,43 @@ export class HomeComponent implements OnInit{
     }else{
       return this.noClickFav;
     }
+  }
+
+  getChollos(filter?:Filters){
+    this.cholloService.getChollos(filter).subscribe(body => {
+      this.chollos = body.Chollos;
+      for (let i = 0; i < this.chollos.length; i++) {
+        const element = this.chollos[i];
+        let isFavorite = false;
+        if(element.id != undefined){
+        for (let i = 0; i < this.chollosFavoritos.length; i++) {
+          if(this.chollosFavoritos[i].id == element.id){
+            isFavorite = true
+          }
+        }
+        if(isFavorite){
+          this.favClicked.set(element.id, this.clickedFav);
+        }else{
+          this.favClicked.set(element.id, this.noClickFav);
+        }
+        }
+      }
+    })
+}
+
+  next(){
+    this.page++;
+    this.filters.page = this.page;
+    this.getChollos(this.filters);
+  }
+  last(){
+    this.page--;
+    this.filters.page = this.page;
+    this.getChollos(this.filters);
+  }
+  numberClick(numero:number){
+    this.page = numero;
+    this.filters.page = this.page;
+    this.getChollos(this.filters);
   }
 }
