@@ -196,6 +196,20 @@
   .logo-img {
     visibility: hidden;
   }
+
+  .col-12,
+  .col-sm-8,
+  .col-sm-4,
+  .col-md-3,
+  .col-10,
+  .col-9,
+  .col-11 {
+    width: 100%;
+  }
+
+  .bar-side {
+    visibility: hidden;
+  }
 }
 
 @media only screen and (min-height: 740px) {

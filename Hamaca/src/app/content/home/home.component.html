@@ -14,7 +14,7 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="col-12 col-lg-6 col-xl-4 centerItem"> 
+            <div class="col-12 col-lg-6 col-xl-4 centerItem">
                 <mat-form-field style="font-size: 12px; width: 220px;" class="widthInputsSearch">
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
@@ -37,9 +37,9 @@
                     <input type="number" matInput value="1" id="inputPersonas">
                   </mat-form-field>
             </div>
-            <div class="col-12 centerItem"> 
+            <div class="col-12 centerItem">
                 <div class="btnFiltro btnSearch" (click)="clickSearch()">
-                    Buscar                
+                    Buscar
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <div class="containerPrecios">
                     <p class="minWidthLabelPrecio">Precio Máximo</p>
                     <input id=precioMax type="text" class="w-75">
-                </div>                
+                </div>
                 <div id="tematicasContainer">
                     <div class="mt-4">Temáticas</div>
                     @for (tematica of tematicas; track tematica.id) {
@@ -93,7 +93,7 @@
                     }
                 </div>
                 <a class="btn btn-sm btn-success mt-4 btnBuscar" (click)="filterClick()" >
-                    Buscar                
+                    Buscar
                 </a>
             </div>
         </div>
@@ -107,7 +107,7 @@
                             }
                         </div>
                         @if (chollo.imagen != null) {
-                            <img class="imgChollo"src="https://content.buscounchollo.com/img/groups/26098/panoramica4.jpg?v=1702473143" alt=""/>
+                            <img class="imgChollo" [src]="getImgUrl()" alt=""/>
                         }@else {
                             <img class="imgChollo"src="" alt="">
                         }
@@ -129,6 +129,15 @@
                     </div>
                 </div>
             }
+            <nav aria-label="Page navigation example d-flex mb-2">
+                <div class="pagination justify-content-center flex-wrap">
+                    <div class="page-item"><a class="page-link" href="#">Previous</a></div>
+                    <div class="page-item"><a class="page-link" href="#" (click)="numberClick(0)">1</a></div>
+                    <div class="page-item"><a class="page-link" href="#" (click)="numberClick(1)">2</a></div>
+                    <div class="page-item"><a class="page-link" href="#" (click)="numberClick(2)">3</a></div>
+                    <div class="page-item"><a class="page-link" href="#">Next</a></div>
+                </div>
+            </nav>
         </div>
     </div>
 </div>

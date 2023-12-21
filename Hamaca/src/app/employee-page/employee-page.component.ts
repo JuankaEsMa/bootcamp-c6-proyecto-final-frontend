@@ -26,16 +26,16 @@ export class EmployeePageComponent implements OnInit{
   }
 
   obtenerChollos(){
-    this.cholloService.getAllChollos().subscribe(body => {
+    this.cholloService.getChollos().subscribe(body => {
       this.chollos = body.Chollos;
     })
   }
 
   eliminar(idChollo:any){
-    // this.cholloService.deleteCholloById(idChollo).subscribe((data:any) => {    //Funcional
-    //   this.ngOnInit();
-    //   console.log(this.chollos);
-    // })
+    this.cholloService.deleteCholloById(idChollo).subscribe((data:any) => {
+      this.ngOnInit();
+      console.log(this.chollos);
+    })
   }
 
   seleccionar(idChollo:any){
