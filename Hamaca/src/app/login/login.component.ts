@@ -64,7 +64,7 @@ export class LoginComponent implements AfterViewInit {
           next: (result) => {
             if (result.token) {
               this.tokenService.saveToken(result.token);
-              this.router.navigate(['home']);
+              this.router.navigate(['']);
             }
           },
           error: (error) => {

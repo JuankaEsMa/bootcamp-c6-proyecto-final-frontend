@@ -16,6 +16,9 @@ export class UsuarioService {
   saveCholloFavorite(cholloId:number):Observable<any>{
     return this.httpClient.post("https://proyecto-final-backend-production-c6e8.up.railway.app/cliente/addCholloFav",{id:cholloId})
   }
+  removeCholloFavorite(cholloId:number):Observable<any>{
+    return this.httpClient.post("https://proyecto-final-backend-production-c6e8.up.railway.app/cliente/addCholloFav",{id:cholloId})
+  }
   getMyCliente():Observable<any>{
     return this.httpClient.get("https://proyecto-final-backend-production-c6e8.up.railway.app/cliente/myCliente");
   }
