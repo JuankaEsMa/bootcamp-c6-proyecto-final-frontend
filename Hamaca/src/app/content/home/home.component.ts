@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition, faCalendar, faUser, faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import { faEarthEurope, faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; 
+import { faEarthEurope, faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { Chollo } from '../../models/chollo.model';
 import { CholloService } from '../../services/chollo.service';
 import { Tematica } from '../../models/tematica.model';
@@ -17,12 +17,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import { DateAdapter } from '@angular/material/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/user.service';
-import { error } from 'console';
 import { User } from '../../models/user.model';
-import { subscribe } from 'diagnostics_channel';
 import { SharedService } from '../../services/shared.service';
 import { finalize } from 'rxjs';
 
@@ -37,7 +34,22 @@ import { finalize } from 'rxjs';
 })
 export class HomeComponent implements OnInit{
 
-  constructor(private cholloService: CholloService, private tematicaService: TematicaService, 
+  images = [
+    'assets/madrid.jpg',
+    'assets/paris.jpg',
+    'assets/berlin.jpg',
+    'assets/roma.jpg',
+    'assets/lisboa.jpg',
+    'assets/barcelona.jpg',
+    'assets/crucero.jpg',
+    'assets/senderismo.jpg',
+    'assets/louvre.jpg',
+    'assets/spa.jpg'
+   ];
+
+  currentIndex = 0;
+
+  constructor(private cholloService: CholloService, private tematicaService: TematicaService,
     private localidadService:LocalidadService, private paisService:PaisService, private router: Router,
     private userService:UsuarioService, private sharedService: SharedService){}
 
@@ -54,7 +66,7 @@ export class HomeComponent implements OnInit{
     totalPages = 0;
     isLogged:boolean = false;
     selectedPais:any = "";
-    daysBetween:number = 1; 
+    daysBetween:number = 1;
     cantidadPersonas:any;
     chollos:Array<Chollo> = [];
     chollosFavoritos:Array<Chollo> = []
@@ -200,7 +212,7 @@ export class HomeComponent implements OnInit{
       console.log(this.daysBetween)
     }
     this.filters.pais = this.selectedPais;
-    
+
     this.getChollos(this.filters)
   }
 
@@ -240,7 +252,16 @@ export class HomeComponent implements OnInit{
         }
       }
     })
-}
+  }
+
+  getImgUrl(): string {
+    const currentImg = this.images[this.currentIndex];
+    this.currentIndex++;
+    if (this.currentIndex == 10) {
+      this.currentIndex = 0;
+    }
+    return currentImg;
+  }
 
   next(){
     this.page++;
