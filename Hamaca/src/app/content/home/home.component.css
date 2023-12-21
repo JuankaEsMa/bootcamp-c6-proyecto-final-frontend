@@ -49,9 +49,11 @@
 }
 .imgChollo{
     height: 100%;
+    width: 100%;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    object-fit: cover;
 }
 .cholloPrecio{
     position: relative;
@@ -113,6 +115,7 @@
 
 .imgChollo{
     height: 100%;
+    object-fit: cover;
 }
 
 .containerHeaderHome{
