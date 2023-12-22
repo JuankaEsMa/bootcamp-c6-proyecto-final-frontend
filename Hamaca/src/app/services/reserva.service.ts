@@ -16,4 +16,11 @@ export class ReservaService {
   listReservas():Observable<any>{
     return this.httpClient.get("https://proyecto-final-backend-production-c6e8.up.railway.app/reserva");
   }
+  setNota(note:number, idReserva:number){
+    return this.httpClient.put("https://proyecto-final-backend-production-c6e8.up.railway.app/reserva/"+idReserva+"/setNota?nota="+note,{})
+  }
+  addReserva(idChollo:number, fechaInicio:string, fechaFin:string, numPersonas:string){
+    return this.httpClient.post("https://proyecto-final-backend-production-c6e8.up.railway.app/reserva?idChollo="
+    +idChollo+"&fechaInicio="+fechaInicio+"&fechaFin="+fechaFin+"&numPersonas="+numPersonas,{})
+  }
 }

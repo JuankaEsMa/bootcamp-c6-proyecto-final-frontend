@@ -8,11 +8,17 @@
     background-color: rgba(228, 244, 241, 1);
 }
 
+.centerItem{
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+}
+
 .description, .location{
     position:relative;
     background-color: white;
-    margin: 15px;
-    padding: 3px;
+    margin: 5px;
+    padding: 10px;
     width: 65%;
     border-radius: 15px;
 }

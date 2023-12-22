@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chollo } from '../../models/chollo.model';
 import { Reserva } from '../../models/reserva.model';
 import { Router, RouterLink } from '@angular/router';
@@ -16,6 +16,7 @@ import { faEarthEurope, faHeart as solidHeart } from '@fortawesome/free-solid-sv
   styleUrl: './reservas.component.css'
 })
 export class ReservasComponent {
+  @ViewChild('modal') myModal?: ElementRef;
   user: User | null = null; 
   reservas:Array<Reserva> = [];
   favClicked: Map<number,IconDefinition> = new Map<number, IconDefinition>;
@@ -23,6 +24,7 @@ export class ReservasComponent {
   clickedFav = solidHeart;
   daysBetween:number = 1; 
   cantidadPersonas:any;
+  reservaId:number = 1;
   chollosFavoritos:Array<Chollo> = []
 
 
@@ -30,7 +32,6 @@ export class ReservasComponent {
 
   ngOnInit(): void {
 
-    console.log('Buscando:');
     this.getReservas();
 
   }
@@ -39,31 +40,6 @@ export class ReservasComponent {
     this.reservaService.listReservas().subscribe({
       next: (reservas)=>{
         this.reservas = reservas;
-        // console.log(user);
-
-        for (let i = 0; i < this.reservas.length; i++) {
-          const chollo = this.reservas[i].chollo!;
-        
-          if(chollo.id != undefined){
-            for (let i = 0; i < this.reservas.length; i++) {
-              const element = this.reservas[i].chollo;
-              let isFavorite = false;
-              if(element != undefined){
-                for (let i = 0; i < this.chollosFavoritos.length; i++) {
-                  if(this.chollosFavoritos[i].id == element.id){
-                    isFavorite = true
-                  }
-                }
-                if(isFavorite){
-                  this.favClicked.set(element.id!, this.clickedFav);
-                }else{
-                  this.favClicked.set(element.id!, this.noClickFav);
-                }
-              }
-            }
-          }
-        }
-
       },
       error:(error)=>{
         console.log('Ha sucedido un error!');
@@ -90,12 +66,27 @@ export class ReservasComponent {
   clickChollo(id:any){
     this.router.navigate(["chollo/"+id],{queryParams: {daysBetween:this.daysBetween, personas:this.cantidadPersonas}});
   }
+  setNota(){
+    let nota:any = document.getElementById("inputNota");
+    console.log(nota.value);
+    this.reservaService.setNota(nota.value, this.reservaId).subscribe({
+      next:(result)=>{
+        console.log(result);
+        this.closeModal();
+      },
+      error:(error)=>{
+        console.log(error);
+      }
+    });
+  }
 
-  precioTotal(id:any){
-    // if(id != undefined){
-    //   return (this.reservas[id].chollo!.precioPersona!)*(this.reservas[id]!.numNoches!);
-    // }else{
-      return 0;
-    //}
+  openModel(reserva:number|undefined){
+    (this.myModal?.nativeElement).modal('show');
+    if(reserva)
+    this.reservaId = reserva;
+  }
+
+  closeModal(){
+    (this.myModal?.nativeElement).modal('hide');
   }
 }

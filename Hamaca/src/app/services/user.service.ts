@@ -28,4 +28,7 @@ export class UsuarioService {
   updateUsuario(user:User):Observable<User>{
     return this.httpClient.put("https://proyecto-final-backend-production-c6e8.up.railway.app/usuario",user);
   }
+  getMyUser():Observable<User>{
+    return this.httpClient.get("https://proyecto-final-backend-production-c6e8.up.railway.app/usuario/myUser");
+  }
 }

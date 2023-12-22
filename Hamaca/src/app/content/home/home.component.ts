@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit{
     'assets/senderismo.jpg',
     'assets/louvre.jpg',
     'assets/spa.jpg'
-   ];
+  ];
 
   currentIndex = 0;
 
@@ -210,10 +210,10 @@ export class HomeComponent implements OnInit{
     }
     if(end != null && start != null){
       this.daysBetween = end.getDate() - start.getDate()
-      console.log(this.daysBetween)
+      this.filters.dataInicio = start.getFullYear()+"-"+start.getMonth()+"-"+start.getDate();
+      console.log(this.filters.dataInicio);
     }
     this.filters.pais = this.selectedPais;
-
     this.getChollos(this.filters)
   }
 

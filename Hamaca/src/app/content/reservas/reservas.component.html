@@ -7,13 +7,8 @@
             @for (reserva of reservas; track reserva.id) {
                 <div class="m-2 cholloContainer rounded">
                     <div class="imgCholloContainer">
-                        <div class="containerFavClick">
-                            @if (reserva.id != undefined) {
-                                <fa-icon [icon]="getFavIcon(reserva.id)" class="favButton"></fa-icon>
-                            }
-                        </div>
                         @if (reserva.chollo?.imagen != null) {
-                            <img class="imgChollo"src="https://content.buscounchollo.com/img/groups/26098/panoramica4.jpg?v=1702473143" alt=""/>
+                            <img class="imgChollo"src="{{reserva.chollo?.imagen}}" alt=""/>
                         }@else {
                             <img class="imgChollo"src="" alt="">
                         }
@@ -31,15 +26,59 @@
                     </div>
                     <div class="cholloDescription">
                         <h2 class="link"(click)="clickChollo(reserva.chollo?.id)">{{reserva.chollo?.titulo}}</h2>
-                        <p>{{reserva.chollo?.descripcion}}</p>
-                        <p>Fecha de la compra: {{reserva.fechaCompra}}</p>
-                        <p>Nota: {{reserva.nota}}</p>
-                        <p>Numero de noches: {{reserva.numNoches}}</p>
-                        <p>Numero de personas: {{reserva.numPersonas}}</p>
-                        <p>Precio total: {{precioTotal(reserva.id)}}</p>
+                        <div class="container containerReserva text-center rounded">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <p><strong>Numero de personas:</strong> {{reserva.numPersonas}}</p>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <p><strong>Numero de noches:</strong> {{reserva.numNoches}}</p>
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-4">
+                                    <p><strong>Fecha de la compra:</strong> {{reserva.fechaCompra}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 row">
+                                    <div class="col-12">
+                                        @if (reserva.nota) {
+                                            <p><strong>Nota:</strong> <span (click)="setNota()">{{reserva.nota}}</span></p>                              
+                                        }@else {
+                                            <p><strong>Nota:</strong> <span >poner nota</span></p>                              
+                                        }
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="btn btn-warning btnUpdateNota" (click)="openModel(reserva.id)" data-bs-toggle="modal" data-bs-target="#modal">update Nota</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 centerItem">
+                                    @if(reserva.chollo && reserva.numPersonas && reserva.numNoches && reserva.chollo.precioPersona){
+                                        <p><strong>Precio total:</strong> {{reserva.chollo.precioPersona * reserva.numNoches * reserva.numPersonas}}</p>
+                                    }@else{
+                                        <p><strong>Precio total:</strong> A ocurrido un error!</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
         </div>
+    </div>
+</div>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body centerItem">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Nota (entre 1 y 10):</label>
+                <input id="inputNota" type="number" class="form-control" min="1" max="10">
+              </div>
+        </div>
+        <div class="modal-footer centerItem">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="setNota()">Guardar Nota</button>
+        </div>
+      </div>
     </div>
 </div>
