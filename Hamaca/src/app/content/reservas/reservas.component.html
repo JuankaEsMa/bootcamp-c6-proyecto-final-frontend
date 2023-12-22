@@ -2,36 +2,41 @@
     <div class="row lista">
         <div class="col-12 col-lg-9 mt-4">
             <div class="text-center align-items-center justify-content-center titulo">
-                <h1>Chollos que te han gustado:</h1>
+                <h1>Tu lista de reservas:</h1>
             </div>
-            @for (chollo of chollosFavoritos; track chollo.id) {
+            @for (reserva of reservas; track reserva.id) {
                 <div class="m-2 cholloContainer rounded">
                     <div class="imgCholloContainer">
                         <div class="containerFavClick">
-                            @if (chollo.id != undefined) {
-                                <fa-icon [icon]="getFavIcon(chollo.id)" (click)="eraseFav(chollo.id)" class="favButton"></fa-icon>
+                            @if (reserva.id != undefined) {
+                                <fa-icon [icon]="getFavIcon(reserva.id)" class="favButton"></fa-icon>
                             }
                         </div>
-                        @if (chollo.imagen != null) {
+                        @if (reserva.chollo?.imagen != null) {
                             <img class="imgChollo"src="https://content.buscounchollo.com/img/groups/26098/panoramica4.jpg?v=1702473143" alt=""/>
                         }@else {
                             <img class="imgChollo"src="" alt="">
                         }
                         <div class="cholloTimeExpiration">
                             <div class="centerItem ms-4">
-                                Valida hasta el {{chollo.fechaCaducidad}}
+                                Valida hasta el {{reserva.chollo?.fechaCaducidad}}
                             </div>
                             <div class="cholloPrecio">
                                 <div class="text-center precioText">
-                                    <span class="precioFont">{{calculatePrecio(chollo.precioPersona)}}€</span><br>
+                                    <span class="precioFont">{{calculatePrecio(reserva.chollo?.precioPersona)}}€</span><br>
                                     /Pers.
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="cholloDescription">
-                        <h2 class="link"(click)="clickChollo(chollo.id)">{{chollo.titulo}}</h2>
-                        <p>{{chollo.descripcion}}</p>
+                        <h2 class="link"(click)="clickChollo(reserva.chollo?.id)">{{reserva.chollo?.titulo}}</h2>
+                        <p>{{reserva.chollo?.descripcion}}</p>
+                        <p>Fecha de la compra: {{reserva.fechaCompra}}</p>
+                        <p>Nota: {{reserva.nota}}</p>
+                        <p>Numero de noches: {{reserva.numNoches}}</p>
+                        <p>Numero de personas: {{reserva.numPersonas}}</p>
+                        <p>Precio total: {{precioTotal(reserva.id)}}</p>
                     </div>
                 </div>
             }
