@@ -22,13 +22,14 @@ import { UsuarioService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { SharedService } from '../../services/shared.service';
 import { finalize } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,MatInputModule,MatSelectModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,MatInputModule,MatSelectModule, ReactiveFormsModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -234,6 +235,8 @@ export class HomeComponent implements OnInit{
 
   getChollos(filter?:Filters){
     this.cholloService.getChollos(filter).subscribe(body => {
+      console.log(body);
+      this.totalPages = body.totalPages;
       this.chollos = body.Chollos;
       for (let i = 0; i < this.chollos.length; i++) {
         const element = this.chollos[i];
@@ -252,15 +255,6 @@ export class HomeComponent implements OnInit{
         }
       }
     })
-  }
-
-  getImgUrl(): string {
-    const currentImg = this.images[this.currentIndex];
-    this.currentIndex++;
-    if (this.currentIndex == 10) {
-      this.currentIndex = 0;
-    }
-    return currentImg;
   }
 
   next(){

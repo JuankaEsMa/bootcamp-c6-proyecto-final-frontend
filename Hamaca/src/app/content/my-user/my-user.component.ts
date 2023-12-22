@@ -39,9 +39,7 @@ export class MyUserComponent{
   }
   delete(){
     if(this.usuario != null){
-      this.userService.deleteUser().subscribe(body=>{
-        console.log(body);
-      });
+      this.userService.deleteUser().subscribe();
     }
   }
   edit(){

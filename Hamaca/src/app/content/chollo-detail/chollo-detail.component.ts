@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CholloService } from '../../services/chollo.service';
 import { Injectable } from '@angular/core';
 import { Chollo } from '../../models/chollo.model'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core'
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +15,15 @@ import { Chollo } from '../../models/chollo.model'
 @Component({
   selector: 'app-chollo-detail',
   standalone: true,
-  imports: [],
+  imports: [MatInputModule,MatDatepickerModule,MatNativeDateModule,],
   templateUrl: './chollo-detail.component.html',
   styleUrl: './chollo-detail.component.css'
 })
 export class CholloDetailComponent implements OnInit{
-
+  @ViewChild('modal') myModal?: ElementRef;
+  
   id:string='';
   chollo:Chollo = new Chollo();
-  localidad:any = null;
-  tematicas:Array<any> = [];
   daysBetween: number = 1;
   personas: number = 1;
 
@@ -43,9 +46,6 @@ export class CholloDetailComponent implements OnInit{
     this.service.getCholloById(this.id)
     .subscribe(result => {
       this.chollo = result;
-      console.log(this.chollo);
-      this.localidad = this.chollo.localidad;
-      this.tematicas = this.chollo.tematicas;
     })
   }
 
@@ -56,7 +56,15 @@ export class CholloDetailComponent implements OnInit{
     return 0;
   }
 
-  reservar(id:number|undefined){
-    
+  openModel(){
+    (this.myModal?.nativeElement).modal('show');
+  }
+
+  closeModal(){
+    (this.myModal?.nativeElement).modal('hide');
+  }
+
+  reservar(){
+
   }
 }

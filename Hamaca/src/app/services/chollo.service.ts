@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Chollo } from '../models/chollo.model';
 import { Filters } from '../models/filters.model';
 
+const jsonOptions = {headers: new HttpHeaders({'skipInterceptor': 'true', 'Content-Type':'application/json'})}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +21,7 @@ export class CholloService {
     }else{
       peticion = "https://proyecto-final-backend-production-c6e8.up.railway.app/chollo";
     }
-    return this.httpClient.get(peticion);
+    return this.httpClient.get(peticion, jsonOptions);
   }
   getCholloById(id:string):Observable<Chollo>{
     return this.httpClient.get("https://proyecto-final-backend-production-c6e8.up.railway.app/chollo/"+id);

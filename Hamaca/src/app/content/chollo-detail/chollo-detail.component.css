@@ -2,6 +2,8 @@
     margin: 15px;
 }
 
+::ng-deep .cdk-overlay-container{ z-index:2000;}
+
 .information{
     background-color: rgba(228, 244, 241, 1);
 }
