@@ -1,3 +1,5 @@
+import { Localidad } from "./localidad.model";
+
 export class Chollo {
     id?:number;
     titulo?:string;
@@ -7,6 +9,6 @@ export class Chollo {
     descripcion?:string;
     fechaCaducidad?:Date;
     deleted?:boolean;
-    localidad?:string;
+    localidad?:Localidad;
     tematicas?:any;
 }

@@ -14,11 +14,11 @@
         }@else {
           <div class="dropdown d-flex justify-content-center align-items-center flex-wrap w-100">
             <div class="btn btn-sm user_button login_buttons rounded-5" data-bs-toggle="dropdown" aria-expanded="false">{{getUserInitial()}}</div>
-            <ul class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu dropdown-menu-sm-end text-center" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" routerLink="/my-user">Mi usuario</a></li>
               <li><a class="dropdown-item" routerLink="/favoritos">Favoritos</a></li>
-              <li><a class="dropdown-item" href="#">Reservas</a></li>
-              <li class="btn btn-sm login_buttons" type="button" (click)="logout()">Log Out</li>
+              <li><a class="dropdown-item" routerLink="/reservas">Reservas</a></li>
+              <li class="btn btn-sm login_buttons mx-0" type="button" (click)="logout()">Log Out</li>
 
             </ul>
           </div>

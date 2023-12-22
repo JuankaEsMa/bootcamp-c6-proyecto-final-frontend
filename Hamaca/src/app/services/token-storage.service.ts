@@ -10,7 +10,8 @@ export class TokenStorageService {
   constructor() { }
 
   signOut():void {
-    localStorage.clear();
+    localStorage.removeItem(TOKEN_KEY);
+    console.log(this.getToken)
   }
 
   public saveToken(token:string):void{
@@ -21,7 +22,7 @@ export class TokenStorageService {
   }
 
   public getToken(): string | null  {
-    let token : string | null = '';
+    let token : string | null = null;
     if (typeof localStorage !== 'undefined') {
       token = localStorage.getItem(TOKEN_KEY);
     }

@@ -12,23 +12,24 @@ import { LocalidadService } from '../../services/localidad.service';
 import { PaisService } from '../../services/pais.service';
 import { Filters } from '../../models/filters.model';
 import { Router } from '@angular/router';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule } from '@angular/material/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule} from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { SharedService } from '../../services/shared.service';
 import { finalize } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,MatInputModule,MatSelectModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,MatInputModule,MatSelectModule, ReactiveFormsModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit{
     'assets/senderismo.jpg',
     'assets/louvre.jpg',
     'assets/spa.jpg'
-   ];
+  ];
 
   currentIndex = 0;
 
@@ -209,10 +210,10 @@ export class HomeComponent implements OnInit{
     }
     if(end != null && start != null){
       this.daysBetween = end.getDate() - start.getDate()
-      console.log(this.daysBetween)
+      this.filters.dataInicio = start.getFullYear()+"-"+(start.getMonth()+1)+"-"+start.getDate();
+      console.log(this.filters.dataInicio);
     }
     this.filters.pais = this.selectedPais;
-
     this.getChollos(this.filters)
   }
 
@@ -234,6 +235,8 @@ export class HomeComponent implements OnInit{
 
   getChollos(filter?:Filters){
     this.cholloService.getChollos(filter).subscribe(body => {
+      console.log(body);
+      this.totalPages = body.totalPages;
       this.chollos = body.Chollos;
       for (let i = 0; i < this.chollos.length; i++) {
         const element = this.chollos[i];
@@ -252,15 +255,6 @@ export class HomeComponent implements OnInit{
         }
       }
     })
-  }
-
-  getImgUrl(): string {
-    const currentImg = this.images[this.currentIndex];
-    this.currentIndex++;
-    if (this.currentIndex == 10) {
-      this.currentIndex = 0;
-    }
-    return currentImg;
   }
 
   next(){

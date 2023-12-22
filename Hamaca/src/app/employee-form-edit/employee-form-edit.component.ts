@@ -7,6 +7,7 @@ import { Localidad } from '../models/localidad.model';
 import { CholloService } from '../services/chollo.service';
 import { TematicaService } from '../services/tematica.service'
 import { CommonModule } from '@angular/common';
+import { LocalidadService } from '../services/localidad.service';
 
 @Component({
   selector: 'app-employee-form-edit',
@@ -20,6 +21,7 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
   id:any = '';
   chollo:Chollo = new Chollo();
   tematicas: Array<Tematica> = [];
+  localidades: Array<Localidad> = []
   tematicasChollo: Array<Tematica> = [];
   tematica = new Tematica();
   localidad: any = null;
@@ -36,7 +38,7 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
     tematica: new FormControl('', Validators.required)
   })
 
-  constructor(private tematicaService:TematicaService, private cholloService:CholloService, private route:ActivatedRoute, private elementRef: ElementRef){}
+  constructor(private tematicaService:TematicaService,private localidadService:LocalidadService, private cholloService:CholloService, private route:ActivatedRoute, private elementRef: ElementRef){}
 
   ngOnInit(): void {
     this.tematicaService.getAllTematicas().subscribe(tematicas => {
@@ -44,8 +46,13 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
 
       this.route.params.subscribe(param => 
         this.id = param['id']);
+        this.localidadService.getAllLocalidades().subscribe(localidades=>{
+          this.localidades = localidades;
+        });
         this.set_inputs();
     })
+
+
   }
 
   set_inputs(){
@@ -108,7 +115,11 @@ export class EmployeeFormEditComponent implements OnInit, AfterViewInit{
         this.chollo.precioPersona = parseFloat(this.cholloForm.value.precioPersona!);
         this.chollo.cantidadPersonas = parseInt(this.cholloForm.value.cantidadPersonas!);
         this.chollo.fechaCaducidad = new Date(this.cholloForm.value.fechaCaducidad!);
-        this.chollo.localidad = this.cholloForm.value.localidad?.toString();   
+        for(let i = 0; this.localidades.length > i; i++){
+          if(this.cholloForm.value.localidad == this.localidades[i].nombre){
+            this.chollo.localidad = this.localidades[i];   
+          }
+        }
       }
     })
   }

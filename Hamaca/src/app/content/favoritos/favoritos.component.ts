@@ -29,7 +29,11 @@ export class FavoritosComponent implements OnInit{
   ngOnInit(): void {
 
     console.log('Buscando:');
+    this.getChollosFavoritos();
 
+  }
+
+  getChollosFavoritos(){
     this.userService.getMyCliente().subscribe({
       next: (user)=>{
         this.user = user;
@@ -51,7 +55,6 @@ export class FavoritosComponent implements OnInit{
         console.log('Ha sucedido un error!');
       }
     })
-
   }
 
   getFavIcon(id:number):IconDefinition{

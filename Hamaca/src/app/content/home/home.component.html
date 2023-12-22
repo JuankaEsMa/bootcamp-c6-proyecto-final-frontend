@@ -107,7 +107,7 @@
                             }
                         </div>
                         @if (chollo.imagen != null) {
-                            <img class="imgChollo" [src]="getImgUrl()" alt=""/>
+                            <img class="imgChollo" src="{{chollo.imagen}}" alt=""/>
                         }@else {
                             <img class="imgChollo"src="" alt="">
                         }
@@ -129,15 +129,21 @@
                     </div>
                 </div>
             }
-            <nav aria-label="Page navigation example d-flex mb-2">
-                <div class="pagination justify-content-center flex-wrap">
-                    <div class="page-item"><a class="page-link" href="#">Previous</a></div>
-                    <div class="page-item"><a class="page-link" href="#" (click)="numberClick(0)">1</a></div>
-                    <div class="page-item"><a class="page-link" href="#" (click)="numberClick(1)">2</a></div>
-                    <div class="page-item"><a class="page-link" href="#" (click)="numberClick(2)">3</a></div>
-                    <div class="page-item"><a class="page-link" href="#">Next</a></div>
-                </div>
-            </nav>
+            <div class="m-2">
+                <nav aria-label="Page navigation example d-flex">
+                    <div class="pagination justify-content-center flex-wrap">
+                        @if (!(page == 0)) {
+                            <div class="page-item"><a class="page-link" href="#" (click)="last()">Previous</a></div>
+                        }
+                        <div class="pagination justify-content-center flex-wrap d-flex" *ngFor="let item of [].constructor(totalPages); let i = index">
+                            <div class="page-item"><a class="page-link" href="#" (click)="numberClick(i)">{{i+1}}</a></div>
+                        </div>
+                        @if (!(page == totalPages-1)) {
+                            <div class="page-item"><a class="page-link" href="#" (click)="next()">Next</a></div>
+                        }
+                    </div>
+                </nav>
+            </div>
         </div>
     </div>
 </div>

@@ -29,13 +29,14 @@ export class NavBarComponent {
   }
 
   logout(){
+    window.location.reload()
     this.tokenService.signOut();
     this.router.navigate([''])
     this.user = undefined;
   }
   getUserInitial(){
     if(this.user != undefined){      
-      return this.user.nombre?.charAt(0);
+      return this.user.nombre?.charAt(0).toUpperCase();
     }else{
       return "H";
     }
