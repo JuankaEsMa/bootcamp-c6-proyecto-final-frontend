@@ -210,7 +210,7 @@ export class HomeComponent implements OnInit{
     }
     if(end != null && start != null){
       this.daysBetween = end.getDate() - start.getDate()
-      this.filters.dataInicio = start.getFullYear()+"-"+start.getMonth()+"-"+start.getDate();
+      this.filters.dataInicio = start.getFullYear()+"-"+(start.getMonth()+1)+"-"+start.getDate();
       console.log(this.filters.dataInicio);
     }
     this.filters.pais = this.selectedPais;

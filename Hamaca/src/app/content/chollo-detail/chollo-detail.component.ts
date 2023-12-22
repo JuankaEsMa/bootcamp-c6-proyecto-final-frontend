@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CholloService } from '../../services/chollo.service';
 import { Injectable } from '@angular/core';
 import { Chollo } from '../../models/chollo.model'
@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReservaService } from '../../services/reserva.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,8 @@ export class CholloDetailComponent implements OnInit{
   daysBetween: number = 1;
   personas: number = 1;
 
-  constructor(private route:ActivatedRoute, private service:CholloService, private reservaService: ReservaService){}
+  constructor(private route:ActivatedRoute, private service:CholloService, private reservaService: ReservaService,
+    private tokenService: TokenStorageService, private router: Router){}
 
   ngOnInit(): void {
     this.route.params.subscribe(param => 
