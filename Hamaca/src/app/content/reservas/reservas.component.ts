@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Chollo } from '../../models/chollo.model';
+import { Reserva } from '../../models/reserva.model';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../models/user.model';
-import { UsuarioService } from '../../services/user.service';
+import { ReservaService } from '../../services/reserva.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition, faCalendar, faUser, faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faEarthEurope, faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; 
@@ -11,41 +12,54 @@ import { faEarthEurope, faHeart as solidHeart } from '@fortawesome/free-solid-sv
   selector: 'app-favoritos',
   standalone: true,
   imports: [RouterLink, FontAwesomeModule],
-  templateUrl: './favoritos.component.html',
-  styleUrl: './favoritos.component.css'
+  templateUrl: './reservas.component.html',
+  styleUrl: './reservas.component.css'
 })
-export class FavoritosComponent implements OnInit{
-
+export class ReservasComponent {
   user: User | null = null; 
-  chollosFavoritos:Array<Chollo> = [];
+  reservas:Array<Reserva> = [];
   favClicked: Map<number,IconDefinition> = new Map<number, IconDefinition>;
   noClickFav = regularHeart;
   clickedFav = solidHeart;
   daysBetween:number = 1; 
   cantidadPersonas:any;
+  chollosFavoritos:Array<Chollo> = []
 
-  constructor(private userService:UsuarioService, private router:Router){}
+
+  constructor(private reservaService:ReservaService, private router:Router){}
 
   ngOnInit(): void {
 
     console.log('Buscando:');
-    this.getChollosFavoritos();
+    this.getReservas();
 
   }
 
-  getChollosFavoritos(){
-    this.userService.getMyCliente().subscribe({
-      next: (user)=>{
-        this.user = user;
-        this.chollosFavoritos = user.chollosFavoritos;
+  getReservas(){
+    this.reservaService.listReservas().subscribe({
+      next: (reservas)=>{
+        this.reservas = reservas;
         // console.log(user);
 
-        for (let i = 0; i < this.chollosFavoritos.length; i++) {
-          const chollo = this.chollosFavoritos[i];
+        for (let i = 0; i < this.reservas.length; i++) {
+          const chollo = this.reservas[i].chollo!;
         
           if(chollo.id != undefined){
-            if(this.chollosFavoritos[i].id == chollo.id){
-              this.favClicked.set(chollo.id, this.clickedFav);
+            for (let i = 0; i < this.reservas.length; i++) {
+              const element = this.reservas[i].chollo;
+              let isFavorite = false;
+              if(element != undefined){
+                for (let i = 0; i < this.chollosFavoritos.length; i++) {
+                  if(this.chollosFavoritos[i].id == element.id){
+                    isFavorite = true
+                  }
+                }
+                if(isFavorite){
+                  this.favClicked.set(element.id!, this.clickedFav);
+                }else{
+                  this.favClicked.set(element.id!, this.noClickFav);
+                }
+              }
             }
           }
         }
@@ -66,27 +80,6 @@ export class FavoritosComponent implements OnInit{
     }
   }
 
-  eraseFav(id:any){
-      if(this.favClicked.get(id) != null){
-        this.userService.removeCholloFavorite(id).subscribe({
-          next: (result) => {
-            console.log(result);
-            this.ngOnInit();
-          },
-          error: (error) => {
-            console.log(error);
-            if (error.status === 403) {
-              this.router.navigate(['login']);
-            }else if(error.status === 200){
-              this.favClicked.set(id,this.clickedFav);
-            }else{
-              console.log(error.status);
-            }
-          }
-        });
-      }
-  }
-
   calculatePrecio(precio:number|undefined):number{
     if(precio != undefined){
       return this.daysBetween * precio;
@@ -96,5 +89,13 @@ export class FavoritosComponent implements OnInit{
 
   clickChollo(id:any){
     this.router.navigate(["chollo/"+id],{queryParams: {daysBetween:this.daysBetween, personas:this.cantidadPersonas}});
+  }
+
+  precioTotal(id:any){
+    // if(id != undefined){
+    //   return (this.reservas[id].chollo!.precioPersona!)*(this.reservas[id]!.numNoches!);
+    // }else{
+      return 0;
+    //}
   }
 }
